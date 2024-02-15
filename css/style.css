@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Josefin+Sans:wght@500&family=Kristi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Josefin+Sans:wght@500&family=Kristi&family=Zilla+Slab:wght@300&display=swap');
+
+.navbar-brand{
+  font-family:'kristi';
+}
+body{
+  background-color: #D4D6DA;
+  font-family: 'Zilla Slab';
+}
+.navbar-text{
+  align-items: right;
+}
+footer{
+
+  background-color: #A4D2EF;
+}
+.navbar{
+  background-color: #A4D2EF;
+}
