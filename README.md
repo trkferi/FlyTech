@@ -1,1 +1,1 @@
-# Török Ferec, Vörös Alexandra
+# Török Ferenc, Vörös Alexandra
