@@ -38,9 +38,21 @@ footer{
   background-size: cover;
   
 }
-h4{
-    text-align: right;
+.bannerrolunk{
+  background-image: url(../pics/rolunkbanner.jpg);
+  height: 400px;
+  background-position: center center;
+  background-size: cover;
+  
 }
+.bannertesztvezetes{
+  background-image: url(../pics/tesztvezetesbanner.jpg);
+  height: 400px;
+  background-position: center center;
+  background-size: cover;
+  
+}
+
 .fooldal1{
     border: 1px solid black;
     border-radius: 40px;
@@ -92,4 +104,9 @@ footer li{
 }
 .fooldalikonok:hover{
   opacity: 50%;
+}
+.rolunk{
+  height: 183px;
+  width: 183px;
+  border-radius: 100px;
 }
