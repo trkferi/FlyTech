@@ -8,6 +8,9 @@ body{
   background-color: #D4D6DA;
   font-family: 'Zilla Slab';
 }
+p, li{
+  font-size: 25px;
+}
 .navbar-text{
   align-items: right;
 }
@@ -58,16 +61,18 @@ h2{
     text-align: center;
 }
 footer{
+  height: auto;
   background-color: #A4D2EF;
-  height: 150px;
   padding-top: 20px;
 }
 footer li{
 
   list-style-type: none;
+  font-size: 20px;
 }
 .c{
-  float: right;
+  font-size: 20px;
+  text-align: center;
 }
 .kapcsolat{
 
@@ -81,4 +86,7 @@ footer li{
 .fooldalikonok:hover{
   border-radius: 20px;
   border: #2DAEFF 5px solid;
+}
+li:hover{
+  text-decoration: underline;
 }
