@@ -18,3 +18,78 @@ footer{
 .navbar{
   background-color: #A4D2EF;
 }
+
+.kosar{
+    height: 40px;
+    width: 40px;
+   float: right;
+}
+.bannerfooldal{
+    background-image: url(../pics/fooldalbanner.jpg);
+    height: 400px;
+    background-position: center center;
+    background-size: cover;
+    
+}
+.bannerkapcsolatok{
+  background-image: url(../pics/kapcsolatokbanner.jpg);
+  height: 400px;
+  background-position: center center;
+  background-size: cover;
+  
+}
+h4{
+    text-align: right;
+}
+.fooldal1{
+    border: 1px solid black;
+    border-radius: 40px;
+}
+.leiras{
+    line-height: 30px;
+    text-align: justify;
+}
+h5{
+    color: #2DAEFF;
+
+}
+.felsorolas
+{
+    margin-left: 200px;
+    width: 900px;
+    text-align: justify;
+
+}
+.felsorolas2
+{
+    margin-left: 600px;
+    width: 900px;
+    text-align: justify;
+}
+h2{
+    text-align: center;
+}
+footer{
+  background-color: #A4D2EF;
+  height: 150px;
+  padding-top: 20px;
+}
+footer li{
+
+  list-style-type: none;
+}
+.c{
+  float: right;
+}
+.kapcsolat{
+
+  text-align: center;
+
+}
+#basic-addon2{
+  background-color: #D4D6DA;
+  color: black;
+}
+.fooldalikonok:hover{
+  opacity: 50%;
+}

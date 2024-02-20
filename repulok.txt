@@ -1,0 +1,52 @@
+hawker 400xp:
+Ülések: 7
+MŰSZAKI SPECIFIKÁCIÓ:
+Max. repülési sebesség: 833,4km/h
+NBAA IFR távolság:2,468km
+KABIN MÉRETE:
+Hosszúság: 4.72m
+Szélesség: 1.50m
+Magasság: 1.46m
+
+king air 250:
+Ülések: 7-8
+MŰSZAKI SPECIFIKÁCIÓ:
+Max. repülési sebesség: 580km/h
+NBAA IFR távolság: 3.185km
+KABIN MÉRETE:
+Hosszúság: 5,94m
+Szélesség: 1,37m
+Magasság: 1,45m
+
+citation mustang:
+4 ülés
+műszaki specifikációk:
+max repülési sebesség: 640km/h
+NBAA IFR távolság2.130km
+KABIN MÉRETE:
+Hosszúság2,97m
+Szélesség1,40m
+Magasság1,37m
+
+
+Dunakeszi irányok: 
+		- Balatoni körút: Dunakeszi - Budapest - Székesfehérvár - Siófok - Keszthely - Balatonfüred - Székesfehérvár -Budapest - Dunakeszi (344km, 1óra 40perc, 60.000ft)
+		- Déli körút: Dunakeszi - Budapest - Szigetszentmiklós - Ráckeve - Dunaújváros - Kunszentmiklós - Dabas - Budapest - Dunakeszi (162km, 50 perc, 30.000ft)
+		- Keleti körút: Dunakeszi - Vác - Salgótarján - Eger - Tiszafüred - Jászberény - Gödöllő - Dunakeszi (270km, 1óra 20perc, 50.000ft)
+Hévízi irányok: 
+		- Balatoni körút: Hévíz - Keszthely - Fonyód - Balatonszemes - Siófok - Balatonkenese - Balatonfüred - Badacsonytomaj - Hévíz (190km, 1óra, 35.000ft)
+		- Északi kör: Hévíz - Zalaegerszeg- Vasvár - Szombathely - Kőszeg - Bük - Celldömölk - Devecser - Tapolca - Hévíz (314km, 1óra 30perc, 55.000ft)
+		- Déli kör: Hévíz - Marcali - Kaposvár - Szigetvár - Csurgó - Zalakaros - Hévíz (240km, 1óra 10 perc, 45.000ft)
+
+Szegedi irányok:
+		- Északi körút: Szeged - Hódmezővásárhely - Szentes - Kecskemét - Kiskunfélegyház - Kiskunhalas - Mórahalom - Szeged(230km, 1óra 10perc, 40.000ft)
+		- Nyugati körút: Szeged - Mórahalom - Bácsalmás - Baja - Kiskörős - Kiskunmajsa - Szeged (250km, 1óra 15perc, 45.000ft)
+		- Keleti körút: Szeged - Makó - Gyula - Békéscsaba - Szarvas - Szentes - Szeged(300km, 1óra 30perc, 55.000ft)
+Debreceni irányok: 
+		- Északi körút: Debrecen - Nyíregyháza - Miskolc - Eger - Tiszafüred - Debrecen(350km, 1óra 45perc, 60.000ft)
+		- Déli körút: Debrecen - Berettyóújfalu - Békéscsaba - Törökszentmiklós - Karcag - Debrecen (300km, 1óra 30perc, 55.000ft)
+		- Nyugati körút: Debrecen - Tiszaújváros - Mezőkövesd - Tiszafüred - Debrecen(200km ,1óra, 35.000ft)
+		
+
+
+		
