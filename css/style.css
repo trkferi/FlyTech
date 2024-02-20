@@ -91,5 +91,6 @@ footer li{
   color: black;
 }
 .fooldalikonok:hover{
-  opacity: 50%;
+  border-radius: 20px;
+  border: #2DAEFF 5px solid;
 }
