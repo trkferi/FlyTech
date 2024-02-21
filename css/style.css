@@ -106,14 +106,13 @@ footer li{
   color: black;
 }
 .fooldalikonok:hover{
-  opacity: 50%;
+  border-radius: 25px;
+  border: #2DAEFF 5px solid;
 }
 .rolunk{
   height: 183px;
   width: 183px;
   border-radius: 100px;
-  border-radius: 20px;
-  border: #2DAEFF 5px solid;
 }
 .container li:hover{
   text-decoration: underline;
