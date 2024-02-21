@@ -87,6 +87,6 @@ footer li{
   border-radius: 20px;
   border: #2DAEFF 5px solid;
 }
-li:hover{
+.container li:hover{
   text-decoration: underline;
 }
