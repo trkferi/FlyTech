@@ -8,12 +8,11 @@ body{
   background-color: #D4D6DA;
   font-family: 'Zilla Slab';
 }
+p, li{
+  font-size: 25px;
+}
 .navbar-text{
   align-items: right;
-}
-footer{
-
-  background-color: #A4D2EF;
 }
 .navbar{
   background-color: #A4D2EF;
@@ -52,46 +51,50 @@ footer{
   background-size: cover;
   
 }
+.bannerjaratok{
+  background-image: url(../pics/jaratokbanner.jpg);
+  height: 600px;
+  background-position: center center;
+  background-size: cover;
+  
+}
 
 .fooldal1{
     border: 1px solid black;
-    border-radius: 40px;
+    border-radius: 20px;
+    float: left;
+    
 }
 .leiras{
-    line-height: 30px;
+  line-height: 30px;
     text-align: justify;
+    text-indent: 30px;
 }
-h5{
+h3{
     color: #2DAEFF;
 
 }
 .felsorolas
 {
-    margin-left: 200px;
-    width: 900px;
     text-align: justify;
 
-}
-.felsorolas2
-{
-    margin-left: 600px;
-    width: 900px;
-    text-align: justify;
 }
 h2{
     text-align: center;
 }
 footer{
+  height: auto;
   background-color: #A4D2EF;
-  height: 150px;
   padding-top: 20px;
 }
 footer li{
 
   list-style-type: none;
+  font-size: 20px;
 }
 .c{
-  float: right;
+  font-size: 20px;
+  text-align: center;
 }
 .kapcsolat{
 
@@ -109,4 +112,9 @@ footer li{
   height: 183px;
   width: 183px;
   border-radius: 100px;
+  border-radius: 20px;
+  border: #2DAEFF 5px solid;
+}
+li:hover{
+  text-decoration: underline;
 }
