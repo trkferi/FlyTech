@@ -63,12 +63,14 @@ p, li{
     border: 1px solid black;
     border-radius: 20px;
     float: left;
+    max-width: 500px;
+    margin-right: 20px;
 
 }
-.leiras{
+p{
   line-height: 30px;
-    text-align: justify;
-    text-indent: 30px;
+  text-align: justify;
+  text-indent: 30px;
 }
 h3{
     color: #2DAEFF;
