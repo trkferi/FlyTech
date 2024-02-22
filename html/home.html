@@ -1,0 +1,84 @@
+<div class="bannerfooldal mb-5"></div>
+
+<div class="container my-5">
+
+	<div class="row mb-5">
+		<div class="col-md-5 mt-5">
+			<img ng-src="./pics/fooldal1.jpg" class="fooldal1">
+		</div>
+		<h2 class="mt-3">
+			"Repülj velünk a magasba: Az élmény, amely a föld felett szárnyal!"
+		</h2>					
+		<p class="leiras mt-5">
+			A sétarepülés egy lenyűgöző és izgalmas élmény, amely lehetőséget biztosít arra, hogy a résztvevők a földtől néhány száz vagy akár ezer méter magasban élvezzék a repülés varázsát.
+		</p>
+		<p class="leiras">
+			A résztvevők felkészítése után a repülőgép felszáll, és a levegőben lévő panorámás kilátásokat élvezhetik. Ez lehetőséget ad arra, hogy megcsodálják a tájat, várost vagy akár a természeti szépségeket egy teljesen új perspektívából. 
+		</p>
+		<p class="leiras"> 
+			A sétarepülés során a résztvevők általában személyre szabott útvonalat választhatnak, és akár pilóta is lehetnek egy rövid időre, megtapasztalva ezzel a repülés örömét és izgalmát. A repülés általában biztonságos és kényelmes, és emlékezetes élményeket nyújt mindazoknak, akik szeretnék megtapasztalni a szabad ég örömét.
+		</p> 
+	</div>
+
+	<div class="row justify-content-center mt-5">
+		<div class="col-12 col-sm-11 col-md-6 col-lg-4 text-center"
+				 ng-repeat="x in data track by $index">
+			<img ng-src="./pics/{{x.img}}.svg" 
+					 width="200px" 
+					 height="200px" 
+					 alt="" 
+					 class="fooldalikonok mt-3">
+			<h3 class="mt-3"><b>{{x.text}}</b></h3> 
+		</div>
+	</div>
+
+	<div class="row mt-5 mb-5">
+		<div class="col-md-9">
+			<h2 class="mb-3">Miért válassza a sétarepülést?</h2>
+			<ul>
+				<li>
+					Élvezze a szabadság érzését, ahogy a felhők fölött szárnyal.
+				</li>
+				<li>
+					Fedezze fel kedvenc tájait és városait egy teljesen új perspektívából.
+				</li>
+				<li>
+					Tapasztalja meg a repülés izgalmát és örömét tapasztalt pilóták vezetésével.
+				</li>
+				<li>
+					Hozzon létre felejthetetlen emlékeket családjával, barátaival vagy szeretteivel.
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+		<img ng-src="./pics/fooldal2.jpg" class="img-fluid" alt="" width="1200px">
+	</div>
+
+	<div class="row mt-5">
+		<div class="offset-3 col-md-9">
+			<h2 class="mb-3">Miért válasszon minket?</h2>
+			<ul>
+				<li>
+					Tapasztalt és engedélyezett pilótáink biztosítják a repülés biztonságát és kényelmét.
+				</li>
+				<li>
+					Modern és jól karbantartott repülőgépeinkkel garantáljuk a minőségi élményt.
+				</li>
+				<li>
+					Rugalmas időpontok és útvonalak állnak rendelkezésre, hogy az Ön igényeinek megfelelően alakítsuk az utat.
+				</li>
+				<li>
+					Barátságos és segítőkész személyzetünk minden lépésnél mellette áll.
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row mt-5">
+		<p class="felsorolas">
+			A sétarepülés kiindulópontjai általában repülőterek vagy speciálisan kijelölt területek, ahol a repülőgépek vagy siklóernyők felszállhatnak. Ezek a helyszínek jól felszereltek és biztonságosak, valamint lehetőséget biztosítanak a résztvevők számára a repülés előtti előkészületekre és a biztonsági oktatásra. Itt találhatók a repülőgépek hangárjai, a kikötőpontok és a földi személyzet, akik segítenek a felszállás előtt és után.
+		</p>
+	</div>
+</div>
