@@ -1,18 +1,21 @@
 <div class="bannerfooldal"></div>
-<div class="container">
-	<div class="row mt-5">
-		<h1 class="text-center">Options</h1>
+<div class="container my-5">
+	<div class="row">
+		<h1 class="text-center">Vélemények</h1>
 
 		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 mt-5">
 			<div class="col"
 					 ng-repeat="x in data track by $index">
 				<div class="card h-100 shadow-sm-bottom-end">
 					<img ng-src="./pics/{{x.img}}" 
-							 class="card-img-top " 
+							 class="card-img-top" 
 							 alt="...">
 					<div class="card-body">
-						<ul>
-							<li ng-repeat="ratings"><i class="fas fa-star"></i></li>
+						<ul class="list-inline text-center">
+							<li class="list-inline-item"
+									ng-repeat="ratings in [].constructor(x.ratings) track by $index">
+								<i class="fas fa-star text-warning"></i>
+							</li>
 						</ul>
 						<h5 class="card-title">{{x.name}}</h5>
 						<p class="card-text velemenyek">{{x.review}}</p>
