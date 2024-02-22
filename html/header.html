@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg"  
+		 style="background-color: #A4D2EF;">
+	<div class="container-fluid">
+		<a class="navbar-brand" ui-sref="home"> Fly<br>Tech </a>
+		<a class="navbar-brand" href="#"> 
+			<img ng-src="./pics/planes.svg" alt=""> 
+		</a>
+		<button class="navbar-toggler" 
+						type="button" 
+						data-bs-toggle="collapse" 
+						data-bs-target="#navbarNavDropdown" 
+						aria-controls="navbarNavDropdown" 
+						aria-expanded="false" 
+						aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" 
+						 aria-current="page" 
+						 ui-sref="home"
+						 ui-sref-active="active">
+						Főoldal
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" 
+						 ui-sref="flights"
+						 ui-sref-active="active">
+						Járatok
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" 
+						 ui-sref="test_drive"
+						 ui-sref-active="active">
+						Tesztvezetés
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" 
+						 ui-sref="offer"
+						 ui-sref-active="active">
+						Ajánlatkérés
+					</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" 
+						 href="#" 
+						 role="button" 
+						 data-bs-toggle="dropdown" 
+						 aria-expanded="false">
+						FlyTech
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" 
+								 ui-sref="relationship"
+								 ui-sref-active="active">
+								Kapcsolat
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" 
+								 ui-sref="about_us"
+								 ui-sref-active="active">
+								Rólunk
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" 
+								 ui-sref="opinions"
+								 ui-sref-active="active">
+								Vélemények
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<span class="navbar-text">
+				<a class="nav-link" 
+					 ui-sref="cart"
+					 ui-sref-active="active">
+					<img ng-src="./pics/shopping-cart.png" class="kosar">
+				</a>
+			</span>
+		</div>
+	</div>
+</nav>

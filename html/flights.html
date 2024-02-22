@@ -1,0 +1,21 @@
+<div class="bannerjaratok mb-5"></div>
+
+<div class="container my-5">
+	<h1 class="mb-4">Válasszon indulási helyet:</h1>
+	<div class="card mb-4 shadow-sm-bottom-end"  
+			 style="max-width: 1000px;"
+			 ng-repeat="x in data track by $index">
+		<div class="row g-0">
+			<div class="col-md-8">
+				<img ng-src="./pics/{{x.img}}.jpg" 
+						 class="img-fluid rounded-start" 
+						 alt="...">
+			</div>
+			<div class="col-md-4">
+				<div class="card-body">
+					<h2 class="card-title">{{x.city}}</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
