@@ -128,8 +128,32 @@
 	// Test drive controller
   .controller('test_driveController', [
     '$scope',
-    function($scope) {
-			console.log('Test drive controller...');
+		'$timeout',
+    function($scope, $timeout) {
+
+			// Apply for test drive
+			$scope.applyFor = () => {
+				let message = "JELENKEZÉS!\n\n";
+				Object.keys($scope.model).forEach(key => {
+					if ($scope.model[key])
+						message += (key + ": " + $scope.model[key] + "\n");
+				});
+				$timeout(() => {
+					alert(message);
+					Object.keys($scope.model).forEach(key => {
+						switch(key) {
+							case 'experience':
+								$scope.model[key] = false;
+								break;
+							case 'country_code':
+								$scope.model[key] = '36';
+								break;
+							default:
+								$scope.model[key] = null;
+						}
+					});
+				}, 50);
+			}
 		}
 	])
 
@@ -269,7 +293,64 @@
   .controller('opinionsController', [
     '$scope',
     function($scope) {
-			console.log('Opinions controller...');
+		$scope.data = [
+			{
+				img: 'avatar.png',
+				name: 'Molnár Gréta', 
+				ratings: 5,
+				review: 'A Sétarepülő Cég kiváló választás repülés szerelmeseinek. Profi, barátságos személyzet és modern gépek biztosítják a biztonságos és felejthetetlen élményt. Rugalmas foglalási lehetőségeik pedig még vonzóbbá teszik számomra. Ajánlom mindenkinek, aki szeretné felfedezni a repülés varázsát.'
+			},
+
+			{
+				img: 'avatar.png',	
+				name: 'Gera Dániel', 
+				ratings: 5,
+				review: 'A személyzetük kiválóan képzett és barátságos, mindig gondoskodnak arról, hogy az utasok biztonságban érezzék magukat és élvezzék a repülés élményét. A repülőgépek modern és jól karbantartottak, így biztosítva a kellemes és zavartalan repülést. Emellett a cég rugalmas foglalási lehetőségeket kínál, így könnyen alkalmazkodhatnak az utasok időbeosztásához és igényeihez. '
+			},
+
+			{
+				img: 'avatar.png',	
+				name: 'Szekeres Ibolya', 
+				ratings: 4,
+				review: 'Szuper személyzet és modern repülőgépek gondoskodnak a biztonságról és a kényelemről. Rugalmas foglalási lehetőségeik pedig még vonzóbbá teszik az utazást. Összességében nagyon pozitív tapasztalatokat szereztem velük és örömmel ajánlom másoknak is.'
+			},
+
+			{
+				img: 'avatar.png',	
+				name: 'Kiss István', 
+				ratings: 5,
+				review: 'Teljes mértékben elégedett vagyok velük, és bátran ajánlom mindenkinek, aki repülés közben szeretné magát biztonságban és kényelemben érezni.'
+			},
+
+			{
+				img: 'avatar.png',	
+				name: 'Orsós Imre', 
+				ratings: 4,
+				review: 'Fantasztikus élmény volt a repülés! A cég csapata nagyon profi és segítőkész volt, minden kérdésemre választ kaptam, és teljes mértékben biztonságban éreztem magam a repülés során.'
+			},
+
+			{
+				img: 'avatar.png',	
+				name: 'Nagy János', 
+				ratings: 5,
+				review: 'Csodálatos kilátások és lenyűgöző élmény! A repülőgép kifogástalan állapotban volt, és a pilóta nagyon hozzáértőnek és barátságosnak bizonyult. Mindenkinek ajánlom, aki szeretne egy felejthetetlen repülési élményben részt venni!'
+			},
+
+			{
+				img: 'avatar.png',	
+				name: 'Móricz Anna', 
+				ratings: 5,
+				review: 'Nagyszerű választás volt ez a cég! Rugalmasak voltak az időpontokkal, és mindent megtettek azért, hogy az élményünk tökéletes legyen. A pilóta szakértelme és az érdekességekkel teli információk tették még emlékezetesebbé a repülést.'
+			},
+
+			{
+				img: 'avatar.png',	
+				name: 'Ferenczi Géza', 
+				ratings: 4,
+				review: 'Lenyűgöző volt az egész repülés! A cég professzionális hozzáállása és a gyönyörű táj látványa feledhetetlen élménnyé tette az egészet. Mindenkinek javaslom, hogy kipróbálja ezt a repülési élményt, garantáltan megéri!'
+			},
+
+		]
 		}
 	])
 
@@ -287,13 +368,9 @@
     function($scope) {
 
 			$scope.feliratkozas = () => {
-    		let email = document.getElementById('email');
-				if (email) {
-					if(email.value)
-								alert("Sikeresen feliratkozott a hírlevelünkre!");
-					else	alert("Kérem adja meg az e-mail címét!");
-					email.value = null;
-				}
+    		alert("Sikeresen feliratkozott a hírlevelünkre!\n" + 
+							`E-mail: ${$scope.model.email_sign}`);
+				$scope.model.email_sign = null;
 			};
 		}
 	]);
