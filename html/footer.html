@@ -6,16 +6,28 @@
 
     <div class="col-sm-4 offset-1">
       <h2 class="pt-3">Feliratkozás hírlevélre</h2>
-      <form action="">
+      <form name="dataSignUp">
         <div class="input-group mb-3">
-          <input type="text" 
+          <!-- <input type="text" 
                  class="form-control" 
                  placeholder="E-mail" 
                  aria-label="E-mail" 
                  aria-describedby="basic-addon2" 
-                 id="email">
-          <button class="input-group-text btn" 
-                  id="basic-addon2" 
+                 id="email"> -->
+          <input class="form-control"
+                 id="email_sign"
+                 name="email_sign" 
+                 type="email"
+                 placeholder="e-mail"
+                 spellcheck="false" 
+                 autocomplete="off"
+                 maxlength="50"
+                 ng-model="model.email_sign"
+                 ng-init="model.email_sign=null"
+                 ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
+                 required>
+          <button class="input-group-text btn"
+                  ng-disabled="dataSignUp.$invalid"
                   ng-click="feliratkozas()">
             Feliratkozom!
           </button>
@@ -26,9 +38,9 @@
     <div class="col-md-3 offset-3">
       <h2>Elérhetőségek</h2>
       <ul>
-        <li><img src="pics/kukacikon.svg" alt="">info@flytech.com</li>
-        <li><img src="pics/levelikon.svg" alt="">Szeged, Bajai út, 6729</li>
-        <li><img src="pics/telefonikon.svg" alt="">+36 30 291 5095</li>
+        <li><img ng-src="./pics/kukacikon.svg" alt="">info@flytech.com</li>
+        <li><img ng-src="./pics/levelikon.svg" alt="">Szeged, Bajai út, 6729</li>
+        <li><img ng-src="./pics/telefonikon.svg" alt="">+36 30 291 5095</li>
       </ul>
     </div>
   </div>

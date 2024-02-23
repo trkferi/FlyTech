@@ -128,8 +128,32 @@
 	// Test drive controller
   .controller('test_driveController', [
     '$scope',
-    function($scope) {
-			console.log('Test drive controller...');
+		'$timeout',
+    function($scope, $timeout) {
+
+			// Apply for test drive
+			$scope.applyFor = () => {
+				let message = "JELENKEZÉS!\n\n";
+				Object.keys($scope.model).forEach(key => {
+					if ($scope.model[key])
+						message += (key + ": " + $scope.model[key] + "\n");
+				});
+				$timeout(() => {
+					alert(message);
+					Object.keys($scope.model).forEach(key => {
+						switch(key) {
+							case 'experience':
+								$scope.model[key] = false;
+								break;
+							case 'country_code':
+								$scope.model[key] = '36';
+								break;
+							default:
+								$scope.model[key] = null;
+						}
+					});
+				}, 50);
+			}
 		}
 	])
 
@@ -344,13 +368,9 @@
     function($scope) {
 
 			$scope.feliratkozas = () => {
-    		let email = document.getElementById('email');
-				if (email) {
-					if(email.value)
-								alert("Sikeresen feliratkozott a hírlevelünkre!");
-					else	alert("Kérem adja meg az e-mail címét!");
-					email.value = null;
-				}
+    		alert("Sikeresen feliratkozott a hírlevelünkre!\n" + 
+							`E-mail: ${$scope.model.email_sign}`);
+				$scope.model.email_sign = null;
 			};
 		}
 	]);
