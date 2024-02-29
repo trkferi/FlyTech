@@ -204,6 +204,6 @@ footer li{
   font-size: 18px;
 
 }
-
-
-
+.card:hover{
+  background-color: #A4D2EF;
+}
