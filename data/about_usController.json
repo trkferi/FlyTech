@@ -1,0 +1,92 @@
+[
+  {
+    "img": "Feri.jpg",	
+    "name": "Török Ferenc", 
+    "phone": "+36 30 125 5578", 
+    "profession": "Igazgató"
+  },
+  {
+    "img": "én1.jpeg", 	
+    "name": "Vörös Alexandra", 
+    "phone": "+36 30 291 5095", 
+    "profession": "Igazgató"
+  },
+  {
+    "img": "manager.jpg", 	
+    "name": "Kovács István", 
+    "phone": "+36 70 544 2548", 
+    "profession": "Manager"
+  },
+  {
+    "img": "KoszoCsaba.jpg", 	
+    "name": "Koszó Csaba", 
+    "phone": "+36 70 584 255", 
+    "profession": "Pilóta"
+  },
+  {
+    "img": "laura1.jpg", 	
+    "name": "Balog-Vigh Laura", 
+    "phone": "+36 30 256 8995", 
+    "profession": "Pilóta"
+  },
+  {
+    "img": "SzaboLajos.jpg", 	
+    "name": "Szabó Lajos", 
+    "phone": "+36 70 458 7447", 
+    "profession": "Pilóta"
+  },
+  {
+    "img": "NagyMiklos.webp", 	
+    "name": "Nagy Miklós", 
+    "phone": "+36 70 859 9696", 
+    "profession": "Légiforgalmi irányító"
+  },
+  {
+    "img": "PeterfyGyorgy.webp", 	
+    "name": "Péterfy György", 
+    "phone": "+36 30 236 4115", 
+    "profession": "Légiforgalmi irányító"
+  },
+  {
+    "img": "cica.jpg", 	
+    "name": "Maszat", 
+    "phone": "", 
+    "profession": "Ügyfélszolgálati munkatárs"
+  },
+  {
+    "img": "linda.jpg", 	
+    "name": "Kovács Linda", 
+    "phone": "+36 70 854 0233", 
+    "profession": "Légiforgalmi irányító"
+  },
+  {
+    "img": "viki.jpg", 	
+    "name": "Illyés Viktória", 
+    "phone": "+36 30 874 2666", 
+    "profession": "Légiforgalmi irányító"
+  },
+  {
+    "img": "edit.jpg", 	
+    "name": "Hajdú Edit", 
+    "phone": "+36 70 854 2511", 
+    "profession": "Pilóta"
+  },
+  {
+    "img": "erik.jpg", 	
+    "name": "Börcsök Erik", 
+    "phone": "+36 70 994 7856", 
+    "profession": "Pilóta"
+  },
+  {
+    "img": "szerelo.jpg", 	
+    "name": "Pap Gergő", 
+    "phone": "+36 30 369 5584", 
+    "profession": "Repülési üzemeltető"
+  },
+  {
+    "img": "szerelo2.jpg", 	
+    "name": "Tóth Márk", 
+    "phone": "+36 70 656 2881", 
+    "profession": "Repülési üzemeltető"
+  }
+]

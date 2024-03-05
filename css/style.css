@@ -58,6 +58,13 @@ p, li{
   background-size: cover;
   
 }
+.bannerajanlatkeres{
+  background-image: url(../pics/ajanlatkeresbanner.jpg);
+  height: 600px;
+  background-position: center center;
+  background-size: cover;
+  
+}
 
 .fooldal1{
     border: 1px solid black;
@@ -68,7 +75,7 @@ p, li{
 
 }
 p{
-  line-height: 30px;
+  line-height: 35px;
   text-align: justify;
   text-indent: 30px;
 }
@@ -121,11 +128,6 @@ footer li{
 }
 .container li:hover{
   text-decoration: underline;
-}
-.tesztvezetes{
-  float: right;
-  width: 720px;
-  height: 340px;
 }
 .kartyak{
   margin: auto;
