@@ -5,24 +5,27 @@
 	<h2>Tesztvezetés</h2>
 
 
-	<!-- <div class="row">
 
-		<div class="col-md-6">
-			<option value="">
-				<select name="" id=""></select>
-			</option>
-		</div>
-
-		<div class="col-md-6">
-			<img ng-src="" alt="">
-		</div>
-
-	</div> -->
 
 	<!-- Form for test drive -->
 	<div class="row justify-content-center mb-3">
 		<form name="dataApplyFor" 
 					class="col-12 col-sm-11 col-md-10 col-lg-8 col-xl-6">
+
+
+			<div class="row">
+
+				<div class="col-md-6">
+					<select id="">
+						<option ng-repeat="x in data">{{x.name}}</option>
+					</select>	
+				</div>
+				
+				<div class="col-md-6">
+					<img ng-src="./pics/{{img}}" alt="">
+				</div>
+				
+			</div>
 
 			<!-- Name -->
 			<div class="mb-3">

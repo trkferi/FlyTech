@@ -130,6 +130,15 @@
     '$scope',
 		'$timeout',
 		'http',
+
+	function($scope) {
+		$scope.data = [
+			{name: 'Hawker 400xp', img:'hawker.jpg'},
+			{name: 'King air 250', img:'king_air.jpg'},
+			{name: 'Citation Mustang', img:'citation_mustang.jpg'}
+					];
+	},
+
     function($scope, $timeout, http) {
 
 			// Set methods
@@ -236,6 +245,8 @@
 			.catch(e => $timeout(() => { alert(e); }, 50));
 		}
 	])
+
+
 
 	// Cart controller
   .controller('cartController', [
