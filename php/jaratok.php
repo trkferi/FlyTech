@@ -18,8 +18,8 @@ $db = new Database();
 $query = "SELECT  `name`, 
                   `distance`, 
                   `period`, 
-                  `price`, 
-                  `direction` 
+                  `direction`,
+                  `price`
             FROM `flights` 
             WHERE `starting_id` = :id";
 

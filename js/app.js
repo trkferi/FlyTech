@@ -148,10 +148,10 @@
 			// Table header
 			$scope.header = [
 				"Megnevezés",
-				"a",
-				"b",
-				"c",
-				"d",
+				"Távolság (km)",
+				"Időtartam (perc)",
+				"Irány",
+				"Ár (Ft)",
 			];
 
 			// Http request
