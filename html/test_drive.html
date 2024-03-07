@@ -12,17 +12,20 @@
 		<form name="dataApplyFor" 
 					class="col-12 col-sm-11 col-md-10 col-lg-8 col-xl-6">
 
-			<div class="row">
+			<div class="row justify-content-start">
 
-				<div class="col-md-6">
-					<select ng-options="x for x in data">{{x.name}}
+				<div class="my-3 col-6">
+					<select class="form-select"
+									ng-options="item as item.name for item in data track by item.name" 
+									ng-model="model.selected">
+						<option hidden disabled selected value>
+							-- kérem válasszon --
+						</option>
 					</select>
 				</div>
-				
-				<div class="col-md-6">
-					<img ng-src="./pics/{{x.img}}" alt="">
+				<div class="my-3 col-6" style="min-height:100px;">
+					<img ng-src="./pics/{{plane}}" class="img-fluid" alt="">
 				</div>
-				
 			</div>
 
 			<!-- Name -->

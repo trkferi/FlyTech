@@ -77,6 +77,13 @@
 				parent: 'root',
 				templateUrl: './html/cart.html',
 				controller: 'cartController'
+			})
+			.state('jaratok', {
+				url: '/jaratok',
+				parent: 'root',
+				templateUrl: './html/jaratok.html',
+				params: {flight:null},
+				controller: 'jaratokController'
 			});
 			
       $urlRouterProvider.otherwise('/');
@@ -89,7 +96,7 @@
     (trans) => {
 
       // Transaction events
-			trans.events();
+			trans.events('jaratok');
     }
   ])
 
@@ -113,15 +120,52 @@
 	// Flights controller
   .controller('flightsController', [
     '$scope',
-    function($scope) {
+		'http',
+    function($scope, http) {
 			
-			// Set data
-			$scope.data = [
-				{img:'dunakeszi',	city:'Dunakeszi'},
-				{img:'heviz', 		city:'Hévíz'},
-				{img:'szeged', 		city:'Szeged'},
-				{img:'debrecen', 	city:'Debrecen'}
+			// Http request
+			http.request('./php/starting_point.php')
+			.then(response => {
+				
+				// Set data
+				$scope.data = response;
+				$scope.$applyAsync();
+			})
+			.catch(error => alert(error));
+		}
+	])
+
+	// Járatok controller
+  .controller('jaratokController', [
+		'$stateParams',
+    '$scope',
+		'http',
+    function($stateParams, $scope, http) {
+
+			// Set actual flight from state parameters
+			$scope.flight = $stateParams.flight;
+
+			// Table header
+			$scope.header = [
+				"Megnevezés",
+				"a",
+				"b",
+				"c",
+				"d",
 			];
+
+			// Http request
+			http.request({
+				url: './php/jaratok.php',
+				data: {id: $scope.flight.id}
+			})
+			.then(response => {
+				
+				// Set data
+				$scope.data = response;
+				$scope.$applyAsync();
+			})
+			.catch(error => alert(error));
 		}
 	])
 
@@ -130,16 +174,22 @@
     '$scope',
 		'$timeout',
 		'http',
-
-	function($scope) {
-		$scope.data = [
-			{name: 'Hawker 400xp', img:'hawker.jpg'},
-			{name: 'King air 250', img:'king_air.jpg'},
-			{name: 'Citation Mustang', img:'citation_mustang.jpg'}
-					];
-	},
-
     function($scope, $timeout, http) {
+
+			$scope.data = [
+				{name: 'Hawker 400xp', img:'hawker.jpg'},
+				{name: 'King air 250', img:'king_air.jpg'},
+				{name: 'Citation Mustang', img:'citation_mustang.jpg'}
+			];
+
+			$scope.plane = null;
+			$scope.$watch('model.selected', (newValue, oldValue) => {
+				if (!angular.equals(newValue, oldValue)) {
+					$scope.plane = newValue.img;
+					$scope.$applyAsync();
+
+				}	
+			});
 
 			// Set methods
 			let methods = {
