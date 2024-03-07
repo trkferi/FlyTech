@@ -12,17 +12,15 @@
 		<form name="dataApplyFor" 
 					class="col-12 col-sm-11 col-md-10 col-lg-8 col-xl-6">
 
-
 			<div class="row">
 
 				<div class="col-md-6">
-					<select id="">
-						<option ng-repeat="x in data">{{x.name}}</option>
-					</select>	
+					<select ng-options="x for x in data">{{x.name}}
+					</select>
 				</div>
 				
 				<div class="col-md-6">
-					<img ng-src="./pics/{{img}}" alt="">
+					<img ng-src="./pics/{{x.img}}" alt="">
 				</div>
 				
 			</div>
