@@ -5,24 +5,28 @@
 	<h2>Tesztvezetés</h2>
 
 
-	<!-- <div class="row">
 
-		<div class="col-md-6">
-			<option value="">
-				<select name="" id=""></select>
-			</option>
-		</div>
-
-		<div class="col-md-6">
-			<img ng-src="" alt="">
-		</div>
-
-	</div> -->
 
 	<!-- Form for test drive -->
 	<div class="row justify-content-center mb-3">
 		<form name="dataApplyFor" 
 					class="col-12 col-sm-11 col-md-10 col-lg-8 col-xl-6">
+
+			<div class="row justify-content-start">
+
+				<div class="my-3 col-6">
+					<select class="form-select"
+									ng-options="item as item.name for item in data track by item.name" 
+									ng-model="model.selected">
+						<option hidden disabled selected value>
+							-- kérem válasszon --
+						</option>
+					</select>
+				</div>
+				<div class="my-3 col-6" style="min-height:150px;">
+					<img ng-src="./pics/{{plane}}" class="img-fluid" alt="">
+				</div>
+			</div>
 
 			<!-- Name -->
 			<div class="mb-3">

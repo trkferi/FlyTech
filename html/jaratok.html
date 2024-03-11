@@ -1,0 +1,23 @@
+<div class="bannerkapcsolatok mb-3"></div>
+
+<div class="container text-center my-5">
+	<h2 class="mt-5">{{flight.city}}</h2>
+	<div class="row">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th ng-repeat="x in header">{{x}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-if="data && data.length"
+            ng-repeat="x in data">
+          <td ng-repeat="(k, v) in x">{{v}}</td>
+        </tr>
+        <tr ng-if="!data || !data.length">
+          <td colspan="{{header.length}}">üres</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

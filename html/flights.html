@@ -2,9 +2,10 @@
 
 <div class="container my-5">
 	<h1 class="mb-4">Válasszon indulási helyet:</h1>
-	<div class="card mb-4 shadow-sm-bottom-end w-85"  
-			 
-			 ng-repeat="x in data track by $index">
+	<a class="card mb-4 shadow-sm-bottom-end"  
+		 style="max-width: 1000px;"
+		 ng-repeat="x in data track by $index"
+		 ui-sref="jaratok({'flight':x})">
 		<div class="row g-0">
 			<div class="col-md-8">
 				<a ui-sref="">
@@ -19,5 +20,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</a>
 </div>

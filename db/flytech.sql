@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Feb 26. 13:53
+-- Létrehozás ideje: 2024. Már 07. 11:19
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -98,18 +98,19 @@ INSERT INTO `planes` (`id`, `name`, `seats`, `img`) VALUES
 
 CREATE TABLE `starting_point` (
   `id` int(11) NOT NULL,
-  `city` varchar(10) NOT NULL
+  `city` varchar(10) NOT NULL,
+  `img` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `starting_point`
 --
 
-INSERT INTO `starting_point` (`id`, `city`) VALUES
-(1, 'Dunakeszi'),
-(2, 'Hévíz'),
-(3, 'Szeged'),
-(4, 'Debrecen');
+INSERT INTO `starting_point` (`id`, `city`, `img`) VALUES
+(1, 'Dunakeszi', 'dunakeszi'),
+(2, 'Hévíz', 'heviz'),
+(3, 'Szeged', 'szeged'),
+(4, 'Debrecen', 'debrecen');
 
 -- --------------------------------------------------------
 
