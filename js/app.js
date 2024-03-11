@@ -125,6 +125,17 @@
 		}
 	])
 
+	// Flights start controller
+	.controller('flightspageController' ,[
+	'$scope',
+	function($scope) {
+		
+
+
+
+		}
+	])
+
 	// Test drive controller
   .controller('test_driveController', [
     '$scope',
