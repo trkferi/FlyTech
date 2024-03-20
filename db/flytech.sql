@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Már 07. 11:19
+-- Létrehozás ideje: 2024. Már 20. 10:12
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -25,10 +25,40 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `cart`
+--
+
+CREATE TABLE `cart` (
+  `item` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `checkout`
+--
+
+CREATE TABLE `checkout` (
+  `id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `country_code` varchar(3) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `card_number` varchar(19) NOT NULL,
+  `card_name` varchar(20) NOT NULL,
+  `expiration` varchar(5) NOT NULL,
+  `cvc` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `flights`
 --
 
 CREATE TABLE `flights` (
+  `id` int(11) NOT NULL,
   `starting_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `distance` int(11) NOT NULL,
@@ -41,19 +71,19 @@ CREATE TABLE `flights` (
 -- A tábla adatainak kiíratása `flights`
 --
 
-INSERT INTO `flights` (`starting_id`, `name`, `distance`, `period`, `price`, `direction`) VALUES
-(1, 'Balatoni körút', 344, 100, 60000, 'Dunakeszi - Budapest - Székesfehérvár - Siófok - Keszthely - Balatonfüred - Székesfehérvár -Budapest - Dunakeszi'),
-(1, 'Déli körút', 162, 50, 30000, 'Dunakeszi - Budapest - Szigetszentmiklós - Ráckeve - Dunaújváros - Kunszentmiklós - Dabas - Budapest - Dunakeszi'),
-(1, 'Keleti körút', 270, 80, 50000, 'Dunakeszi - Vác - Salgótarján - Eger - Tiszafüred - Jászberény - Gödöllő - Dunakeszi'),
-(2, 'Balatoni körút', 190, 60, 35000, 'Hévíz - Keszthely - Fonyód - Balatonszemes - Siófok - Balatonkenese - Balatonfüred - Badacsonytomaj - Hévíz'),
-(2, 'Északi kör', 314, 90, 55000, 'Hévíz - Zalaegerszeg- Vasvár - Szombathely - Kőszeg - Bük - Celldömölk - Devecser - Tapolca - Hévíz'),
-(2, 'Déli körút', 240, 70, 45000, 'Hévíz - Marcali - Kaposvár - Szigetvár - Csurgó - Zalakaros - Hévíz'),
-(3, 'Északi körút', 230, 70, 40000, 'Szeged - Hódmezővásárhely - Szentes - Kecskemét - Kiskunfélegyház - Kiskunhalas - Mórahalom - Szeged'),
-(3, 'Nyugati körút', 250, 75, 45000, 'Szeged - Mórahalom - Bácsalmás - Baja - Kiskörős - Kiskunmajsa - Szeged'),
-(3, 'Keleti körút', 300, 90, 55000, 'Szeged - Makó - Gyula - Békéscsaba - Szarvas - Szentes - Szeged'),
-(4, 'Északi körút', 350, 105, 60000, 'Debrecen - Nyíregyháza - Miskolc - Eger - Tiszafüred - Debrecen'),
-(4, 'Déli körút', 300, 90, 55000, 'Debrecen - Berettyóújfalu - Békéscsaba - Törökszentmiklós - Karcag - Debrecen'),
-(4, 'Nyugati körút', 60, 90, 35000, 'Debrecen - Tiszaújváros - Mezőkövesd - Tiszafüred - Debrecen');
+INSERT INTO `flights` (`id`, `starting_id`, `name`, `distance`, `period`, `price`, `direction`) VALUES
+(1, 1, 'Balatoni körút', 344, 100, 60000, 'Dunakeszi - Budapest - Székesfehérvár - Siófok - Keszthely - Balatonfüred - Székesfehérvár -Budapest - Dunakeszi'),
+(2, 1, 'Déli körút', 162, 50, 30000, 'Dunakeszi - Budapest - Szigetszentmiklós - Ráckeve - Dunaújváros - Kunszentmiklós - Dabas - Budapest - Dunakeszi'),
+(3, 1, 'Keleti körút', 270, 80, 50000, 'Dunakeszi - Vác - Salgótarján - Eger - Tiszafüred - Jászberény - Gödöllő - Dunakeszi'),
+(4, 2, 'Balatoni körút', 190, 60, 35000, 'Hévíz - Keszthely - Fonyód - Balatonszemes - Siófok - Balatonkenese - Balatonfüred - Badacsonytomaj - Hévíz'),
+(5, 2, 'Északi kör', 314, 90, 55000, 'Hévíz - Zalaegerszeg- Vasvár - Szombathely - Kőszeg - Bük - Celldömölk - Devecser - Tapolca - Hévíz'),
+(6, 2, 'Déli körút', 240, 70, 45000, 'Hévíz - Marcali - Kaposvár - Szigetvár - Csurgó - Zalakaros - Hévíz'),
+(7, 3, 'Északi körút', 230, 70, 40000, 'Szeged - Hódmezővásárhely - Szentes - Kecskemét - Kiskunfélegyház - Kiskunhalas - Mórahalom - Szeged'),
+(8, 3, 'Nyugati körút', 250, 75, 45000, 'Szeged - Mórahalom - Bácsalmás - Baja - Kiskörős - Kiskunmajsa - Szeged'),
+(9, 3, 'Keleti körút', 300, 90, 55000, 'Szeged - Makó - Gyula - Békéscsaba - Szarvas - Szentes - Szeged'),
+(10, 4, 'Északi körút', 350, 105, 60000, 'Debrecen - Nyíregyháza - Miskolc - Eger - Tiszafüred - Debrecen'),
+(11, 4, 'Déli körút', 300, 90, 55000, 'Debrecen - Berettyóújfalu - Békéscsaba - Törökszentmiklós - Karcag - Debrecen'),
+(12, 4, 'Nyugati körút', 60, 90, 35000, 'Debrecen - Tiszaújváros - Mezőkövesd - Tiszafüred - Debrecen');
 
 -- --------------------------------------------------------
 
@@ -136,6 +166,18 @@ CREATE TABLE `testdrive` (
 --
 
 --
+-- A tábla indexei `checkout`
+--
+ALTER TABLE `checkout`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `flights`
+--
+ALTER TABLE `flights`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- A tábla indexei `newsletter`
 --
 ALTER TABLE `newsletter`
@@ -163,6 +205,18 @@ ALTER TABLE `testdrive`
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
+
+--
+-- AUTO_INCREMENT a táblához `checkout`
+--
+ALTER TABLE `checkout`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT a táblához `flights`
+--
+ALTER TABLE `flights`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT a táblához `newsletter`

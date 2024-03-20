@@ -66,6 +66,14 @@ p, li{
   
 }
 
+.bannervelemenyek{
+  background-image: url(../pics/velemenybanner.jpg);
+  height: 450px;
+  background-position: center center;
+  background-size: cover;
+  
+}
+
 .fooldal1{
     border: 1px solid black;
     border-radius: 20px;

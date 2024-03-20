@@ -118,22 +118,23 @@
 	])
 
 	// Flights controller
-  .controller('flightsController', [
-    '$scope',
-		'http',
-    function($scope, http) {
-			
-			// Http request
-			http.request('./php/starting_point.php')
-			.then(response => {
+    .controller('flightsController', [
+		'$scope',
+			'http',
+		function($scope, http) {
 				
-				// Set data
-				$scope.data = response;
-				$scope.$applyAsync();
-			})
-			.catch(error => alert(error));
-		}
-	])
+				// Http request
+				http.request('./php/starting_point.php')
+				.then(response => {
+					
+					// Set data
+					$scope.data = response;
+					$scope.$applyAsync();
+				})
+				.catch(error => alert(error));
+			}
+		])
+	
 
 	// Járatok controller
   .controller('jaratokController', [
@@ -170,15 +171,25 @@
 	])
 
 	// Flights start controller
-	.controller('flightspageController' ,[
-	'$scope',
-	function($scope) {
-		
+	.controller('flightsController', [
+		'$scope',
+		function($scope) {
+			'http',
+		function($scope, http) {
+	
 
-
-
+				// Http request
+				http.request('./php/starting_point.php')
+				.then(response => {
+	
+					// Set data
+					$scope.data = response;
+					$scope.$applyAsync();
+				})
+				.catch(error => alert(error));
+			}
 		}
-	])
+		])
 
 	// Test drive controller
   .controller('test_driveController', [
@@ -312,8 +323,43 @@
 	// Cart controller
   .controller('cartController', [
     '$scope',
-    function($scope) {
-			console.log('Cart controller...');
+		'$timeout',
+		'http',
+    function($scope, $timeout, http) {
+
+			// Set methods
+			let methods = {
+
+				// Reset
+				reset: (msg) => {
+
+					// Reset model, and apply change
+					Object.keys($scope.model).forEach(key => {
+						if (key === 'country_code')
+									$scope.model[key] = '36'
+						else if (key === 'experience')
+									$scope.model[key] = false
+						else 	$scope.model[key] = null
+					});
+					$scope.$applyAsync();
+
+					// Show message
+					$timeout(() => { alert(msg); }, 50);
+				}
+			};
+
+			// Apply for test drive
+			$scope.applyFor = () => {
+
+				// Http request
+				http.request({
+					method: 'POST',
+					url		: './php/cart.php',
+					data	: $scope.model
+				})
+				.then(response => methods.reset(response))
+				.catch(error => methods.reset(error));
+			}
 		}
 	])
 

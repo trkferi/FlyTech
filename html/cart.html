@@ -1,9 +1,9 @@
 <div class="container">
 	<div class="row mt-5">
-		<h1 class="text-center">Kosárs</h1>
+		<h1 class="text-center">Kosár</h1>
 		
-		<div class="row">
-			<table class="table table-striped">
+		<div class="col-md-6">
+			<table class="table table-bordered table-striped">
 				<thead>
 				  <tr>
 					<th scope="col">Név</th>
@@ -12,55 +12,39 @@
 				  </tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="">
-
+					<tr ng-if="data && data.length"
+						ng-repeat="x in data">
+				  	   <td ng-repeat=""></td>
+					</tr>
+					<tr ng-if="!data || !data.length">
+				  	   <td colspan="{{header.length}}">Kosár üres</td>
 					</tr>
 				</tbody>
 			  </table>
 		</div>
 
 
-		<div class="row justify-content-center mb-3">
+		<div class="col-12 col-sm-11 col-md-10 col-lg-6 col-xl-6 justify-content-end mb-3">
 			<form name="dataApplyFor" 
-						class="col-12 col-sm-11 col-md-10 col-lg-8 col-xl-6">
+						>
 	
-				<!-- Names -->
 				<div class="row">
-					<div class="col-md-6">
-						<!-- FirstName -->
-						<label for="firstName" class="form-label">Keresztnév:</label>
+					<div class="mb-3 col-6">
+						<!-- name -->
+						<label for="name" class="form-label">Név:</label>
 						<input class="form-control"
-									 id="firstName"
-									 name="firstName" 
+									 id="name"
+									 name="name" 
 									 type="text"
 									 spellcheck="false" 
 									 autocomplete="off"
 									 maxlength="100"
-									 ng-model="model.firstName"
-									 ng-init="model.firstName=null"
+									 ng-model="model.name"
+									 ng-init="model.name=null"
 									 required>
 					</div> 
-					<div class="col-md-6">
-						<!-- LastName -->
-						<label for="lastName" class="form-label">Keresztnév:</label>
-						<input class="form-control"
-									 id="lastName"
-									 name="lastName" 
-									 type="text"
-									 spellcheck="false" 
-									 autocomplete="off"
-									 maxlength="100"
-									 ng-model="model.lastName"
-									 ng-init="model.lastName=null"
-									 required>
-					</div>
-	
-				</div>
-	
-				<!-- Phone -->
-				<div class="mb-3">
-					<label for="country_code" class="form-label">Telefonszam:</label>
-					<div class="mb-3">
+					<div class="mb-3 col-6">
+						<label for="country_code" class="form-label">Telefonszám:</label><br>
 	
 						<!-- Country code -->
 						<span>+</span>
@@ -68,7 +52,7 @@
 									id="country_code"
 									name="country_code" 
 									type="text"
-									style="max-width:60px;"
+									style="max-width:45px;"
 									spellcheck="false" 
 									autocomplete="off"
 									maxlength="3"
@@ -91,7 +75,7 @@
 									ng-pattern="/^$|^(?!(0))[0-9]{7,10}$/"
 									required>
 					</div>
-				</div>
+			</div>
 	
 				<!-- Email -->
 				<div class="mb-3">
@@ -194,7 +178,7 @@
 									class="btn btn-primary px-5"
 									ng-disabled="dataApplyFor.$invalid"
 									ng-click="applyFor()">
-						Küldés
+						Fizetés
 					</button>
 				</div>
 			</form>
