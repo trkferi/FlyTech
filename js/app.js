@@ -135,61 +135,40 @@
 			}
 		])
 	
-
-	// Járatok controller
-  .controller('jaratokController', [
-		'$stateParams',
-    '$scope',
-		'http',
-    function($stateParams, $scope, http) {
-
-			// Set actual flight from state parameters
-			$scope.flight = $stateParams.flight;
-
-			// Table header
-			$scope.header = [
-				"Megnevezés",
-				"Távolság (km)",
-				"Időtartam (perc)",
-				"Irány",
-				"Ár (Ft)",
-			];
-
-			// Http request
-			http.request({
-				url: './php/jaratok.php',
-				data: {id: $scope.flight.id}
-			})
-			.then(response => {
-				
-				// Set data
-				$scope.data = response;
-				$scope.$applyAsync();
-			})
-			.catch(error => alert(error));
-		}
-	])
-
-	// Flights start controller
-	.controller('flightsController', [
+		// Járatok controller
+	  .controller('jaratokController', [
+			'$stateParams',
 		'$scope',
-		function($scope) {
 			'http',
-		function($scope, http) {
+		function($stateParams, $scope, http) {
 	
-
+				// Set actual flight from state parameters
+				$scope.flight = $stateParams.flight;
+	
+				// Table header
+				$scope.header = [
+					"Megnevezés",
+					"Távolság (km)",
+					"Időtartam (perc)",
+					"Irány",
+					"Ár (Ft)",
+				];
+	
 				// Http request
-				http.request('./php/starting_point.php')
+				http.request({
+					url: './php/jaratok.php',
+					data: {id: $scope.flight.id}
+				})
 				.then(response => {
-	
+					
 					// Set data
 					$scope.data = response;
 					$scope.$applyAsync();
 				})
 				.catch(error => alert(error));
 			}
-		}
 		])
+	
 
 	// Test drive controller
   .controller('test_driveController', [
