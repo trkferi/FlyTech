@@ -2,6 +2,24 @@
 
 <div class="container text-center my-5">
 	<h2 class="mt-5">{{flight.city}}</h2>
+
+  <div class="row justify-content-start">
+
+    <div class="my-3 col-6">
+      <select class="form-select"
+              ng-options="item as item.name for item in data track by item.name" 
+              ng-model="model.selected">
+        <option hidden disabled selected value>
+          -- kérem válasszon --
+        </option>
+      </select>
+    </div>
+    <div class="my-3 col-6" style="min-height:150px;">
+    </div>
+  </div>
+
+  
+
 	<div class="row">
     <table class="table table-bordered table-striped">
       <thead>

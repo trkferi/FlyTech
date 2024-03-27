@@ -14,17 +14,25 @@ $args = Util::getArgs();
 // Connect to database
 $db = new Database();
 
-// Set query (Check email already exist)
-$query = "SELECT  `name`, 
+// Set query 
+$query = "SELECT 
                   `distance`, 
                   `period`, 
-                  `direction`,
-                  `price`
+                  `price`,
+                  `start`
             FROM `flights` 
             WHERE `starting_id` = :id";
+            
+$query1 = "SELECT 
+            `direction`
+      FROM `flights` 
+      WHERE `starting_id` = :id";
 
 // Execute query with argument
-$result = $db->execute($query, $args);
+$result2 = $db->execute($query, $args);
+
+// Execute query with argument
+$result = $db->execute($query1, $args);
 
 // Close connection
 $db = null;

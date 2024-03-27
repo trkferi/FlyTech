@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Már 20. 09:59
+-- Létrehozás ideje: 2024. Már 27. 11:12
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -31,6 +31,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `cart`
+--
+
+INSERT INTO `cart` (`item`) VALUES
+(0),
+(6);
 
 -- --------------------------------------------------------
 
@@ -210,6 +218,18 @@ CREATE TABLE `newsletter` (
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `opinions`
+--
+
+CREATE TABLE `opinions` (
+  `name` varchar(20) NOT NULL,
+  `rating` int(5) NOT NULL,
+  `review` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `planes`
 --
 
@@ -217,17 +237,18 @@ CREATE TABLE `planes` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `seats` int(11) NOT NULL,
-  `img` varchar(20) NOT NULL
+  `img` varchar(20) NOT NULL,
+  `day_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `planes`
 --
 
-INSERT INTO `planes` (`id`, `name`, `seats`, `img`) VALUES
-(1, 'Hawker 400xp', 7, 'hawker.jpg'),
-(2, 'King air 250', 8, 'king_air.jpg'),
-(3, 'Citation Mustang', 7, 'citation_mustang.jpg');
+INSERT INTO `planes` (`id`, `name`, `seats`, `img`, `day_price`) VALUES
+(1, 'Hawker 400xp', 7, 'hawker.jpg', 0),
+(2, 'King air 250', 8, 'king_air.jpg', 0),
+(3, 'Citation Mustang', 7, 'citation_mustang.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -279,65 +300,6 @@ CREATE TABLE `testdrive` (
 --
 ALTER TABLE `checkout`
   ADD PRIMARY KEY (`id`);
-
---
--- A tábla indexei `flights`
---
-ALTER TABLE `flights`
-  ADD PRIMARY KEY (`id`);
-
---
--- A tábla indexei `newsletter`
---
-ALTER TABLE `newsletter`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- A tábla indexei `planes`
---
-ALTER TABLE `planes`
-  ADD PRIMARY KEY (`id`);
-
---
--- A tábla indexei `starting_point`
---
-ALTER TABLE `starting_point`
-  ADD PRIMARY KEY (`id`);
-
---
--- A tábla indexei `testdrive`
---
-ALTER TABLE `testdrive`
-  ADD PRIMARY KEY (`id`);
-
---
--- A kiírt táblák AUTO_INCREMENT értéke
---
-
---
--- AUTO_INCREMENT a táblához `checkout`
---
-ALTER TABLE `checkout`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT a táblához `flights`
---
-ALTER TABLE `flights`
-  MODIFY `flights_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
-
---
--- AUTO_INCREMENT a táblához `newsletter`
---
-ALTER TABLE `newsletter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT a táblához `testdrive`
---
-ALTER TABLE `testdrive`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

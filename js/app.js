@@ -144,14 +144,13 @@
 	
 				// Set actual flight from state parameters
 				$scope.flight = $stateParams.flight;
-	
+				
 				// Table header
 				$scope.header = [
-					"Megnevezés",
 					"Távolság (km)",
 					"Időtartam (perc)",
-					"Irány",
 					"Ár (Ft)",
+					"Indulás",
 				];
 	
 				// Http request
@@ -165,7 +164,7 @@
 					$scope.data = response;
 					$scope.$applyAsync();
 				})
-				.catch(error => alert(error));
+				.catch(error => alert(error));			
 			}
 		])
 	
@@ -186,7 +185,7 @@
 			$scope.plane = null;
 			$scope.$watch('model.selected', (newValue, oldValue) => {
 				if (!angular.equals(newValue, oldValue)) {
-					$scope.plane = newValue.img;
+					$scope.plane = newValue.img;	
 					$scope.$applyAsync();
 
 				}	
@@ -230,9 +229,33 @@
 
 	// Offer controller
   .controller('offerController', [
-    '$scope',
-    function($scope) {
-			console.log('Offer controller...');
+	'$scope',
+	'$timeout',
+	'http',
+    function($scope, $timeout, http) {
+			// Get data
+			http.request('./data/opinions.json')
+			.then(response => {
+
+				// Set data, and apply change
+				$scope.data = response;
+				$scope.$applyAsync();
+			})
+			.catch(e => $timeout(() => { alert(e); }, 50));
+
+
+			// Apply for test drive
+			$scope.applyFor = () => {
+
+				// Http request
+				http.request({
+					method: 'POST',
+					url		: './php/opinions.php',
+					data	: $scope.model
+				})
+				.then(response => methods.reset(response))
+				.catch(error => methods.reset(error));
+			}
 		}
 	])
 
@@ -294,6 +317,20 @@
 				$scope.$applyAsync();
 			})
 			.catch(e => $timeout(() => { alert(e); }, 50));
+
+
+			// Apply for test drive
+			$scope.applyFor = () => {
+
+				// Http request
+				http.request({
+					method: 'POST',
+					url		: './php/opinions.php',
+					data	: $scope.model
+				})
+				.then(response => methods.reset(response))
+				.catch(error => methods.reset(error));
+			}
 		}
 	])
 
@@ -305,27 +342,6 @@
 		'$timeout',
 		'http',
     function($scope, $timeout, http) {
-
-			// Set methods
-			let methods = {
-
-				// Reset
-				reset: (msg) => {
-
-					// Reset model, and apply change
-					Object.keys($scope.model).forEach(key => {
-						if (key === 'country_code')
-									$scope.model[key] = '36'
-						else if (key === 'experience')
-									$scope.model[key] = false
-						else 	$scope.model[key] = null
-					});
-					$scope.$applyAsync();
-
-					// Show message
-					$timeout(() => { alert(msg); }, 50);
-				}
-			};
 
 			// Apply for test drive
 			$scope.applyFor = () => {
