@@ -318,6 +318,23 @@
 			})
 			.catch(e => $timeout(() => { alert(e); }, 50));
 
+			// Set methods
+			let methods = {
+
+				// Reset
+				reset: (msg) => {
+
+					// Reset model, and apply change
+					Object.keys($scope.model).forEach(key => {
+
+						$scope.model[key] = null
+					});
+					$scope.$applyAsync();
+
+					// Show message
+					$timeout(() => { alert(msg); }, 50);
+				}
+			};
 
 			// Apply for test drive
 			$scope.applyFor = () => {
@@ -337,11 +354,31 @@
 
 
 	// Cart controller
-  .controller('cartController', [
+  	.controller('cartController', [
     '$scope',
 		'$timeout',
 		'http',
     function($scope, $timeout, http) {
+
+		// Set methods
+		let methods = {
+
+			// Reset
+			reset: (msg) => {
+
+				// Reset model, and apply change
+				Object.keys($scope.model).forEach(key => {
+					if (key === 'country_code')
+								$scope.model[key] = '36'
+
+					else 	$scope.model[key] = null
+				});
+				$scope.$applyAsync();
+
+				// Show message
+				$timeout(() => { alert(msg); }, 50);
+			}
+		};
 
 			// Apply for test drive
 			$scope.applyFor = () => {

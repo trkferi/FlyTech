@@ -23,16 +23,8 @@ $query = "SELECT
             FROM `flights` 
             WHERE `starting_id` = :id";
             
-$query1 = "SELECT 
-            `direction`
-      FROM `flights` 
-      WHERE `starting_id` = :id";
-
 // Execute query with argument
-$result2 = $db->execute($query, $args);
-
-// Execute query with argument
-$result = $db->execute($query1, $args);
+$result = $db->execute($query, $args);
 
 // Close connection
 $db = null;

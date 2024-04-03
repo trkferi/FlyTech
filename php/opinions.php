@@ -32,8 +32,8 @@ $db = null;
 if (!$result['affectedRows']) {
 
 	// Set error
-	Util::setError('Sikertelen fizetés');
+	Util::setError('Sikertelen');
 }
 
 // Set response
-Util::setResponse("Sikeres fizetés!");
+Util::setResponse("Köszönjük az értékelésed!");

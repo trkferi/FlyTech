@@ -4,61 +4,76 @@
 		<h1 class="text-center">Vélemények</h1>
 
 		<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-3 g-3 mt-5">
+			<!--új vélemény-->
 
 			<div class="col" >
-                <div class="testimonial card h-100 shadow-sm-bottom-end">
-					<div class="text-center">
-                  		<img ng-src="./pics/avatar.png" 
-							 class="card-img-top" 
-							 alt="...">
-						<h5 class="card-title">
-							<input class="form-control"
-								placeholder="Név"
-								id="name"
-								name="name" 
-								type="text"
-								spellcheck="false" 
-								autocomplete="off"
-								maxlength="50"
-								ng-model="model.name"
-								ng-init="model.name=null"
-							required>
-						</h5>		
-					</div>
-					<div class="card-body">
+				<form name="dataApplyFor" 
+				>
+            	    <div class="testimonial card h-100 shadow-sm-bottom-end">
+						<div class="text-center">
+                  			<img ng-src="./pics/avatar.png" 
+								 class="card-img-top" 
+								 alt="...">
+							<h5 class="card-title">
+								<input class="form-control"
+									placeholder="Név"
+									id="name"
+									name="name" 
+									type="text"
+									spellcheck="false" 
+									autocomplete="off"
+									maxlength="50"
+									ng-model="model.name"
+									ng-init="model.name=null"
+								required>
+							</h5>		
+						</div>
+						<div class="card-body">
 						
-						<ul class="list-inline text-center">
-							<li class="list-inline-item">
-								<div class="rating">
-									<input type="radio" id="star5" name="rating" value="5" />
-									<label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
-									<input type="radio" id="star4" name="rating" value="4" />
-									<label class="star" for="star4" title="Great" aria-hidden="true"></label>
-									<input type="radio" id="star3" name="rating" value="3" />
-									<label class="star" for="star3" title="Very good" aria-hidden="true"></label>
-									<input type="radio" id="star2" name="rating" value="2" />
-									<label class="star" for="star2" title="Good" aria-hidden="true"></label>
-									<input type="radio" id="star1" name="rating" value="1" />
-									<label class="star" for="star1" title="Bad" aria-hidden="true"></label>
-								  </div>
-							</li>
-						</ul>
+							<ul class="list-inline text-center">
+								<li class="list-inline-item">
+									<div class="rating">
+										<input type="radio" id="star5" name="rating" value="5" />
+										<label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+										<input type="radio" id="star4" name="rating" value="4" />
+										<label class="star" for="star4" title="Great" aria-hidden="true"></label>
+										<input type="radio" id="star3" name="rating" value="3" />
+										<label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+										<input type="radio" id="star2" name="rating" value="2" />
+										<label class="star" for="star2" title="Good" aria-hidden="true"></label>
+										<input type="radio" id="star1" name="rating" value="1" />
+										<label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+									  </div>
+								</li>
+							</ul>
 					
-						<p class="card-text velemenyek">
-							<textarea id="comment"
-								placeholder="Vélemény"
-								name="comment"
-								class="form-control"
-								spellcheck="false" 
-								autocomplete="off"
-								rows="10"
-								ng-model="model.comment"
-								ng-init="model.comment=null">
-							</textarea>
-						</p>
+							<p class="card-text velemenyek">
+								<textarea id="review"
+									placeholder="Vélemény"
+									name="review"
+									class="form-control"
+									spellcheck="false" 
+									autocomplete="off"
+									rows="8"
+									ng-model="model.review"
+									ng-init="model.review=null">
+								</textarea>
+							</p>
+						</div>
+						<div class="my-4 text-end">
+							<button type="button" 
+											class="btn btn-primary px-5"
+											ng-disabled="dataApplyFor.$invalid"
+											ng-click="applyFor()">
+								Küldés
+							</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
+			
+
+			<!--Vélemény kártyák-->
 
 			<div class="col" ng-repeat="x in data track by $index">
                 <div class="testimonial card h-100 shadow-sm-bottom-end">
