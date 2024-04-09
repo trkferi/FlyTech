@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Már 27. 11:12
+-- Létrehozás ideje: 2024. Ápr 09. 11:59
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -218,6 +218,25 @@ CREATE TABLE `newsletter` (
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `offer`
+--
+
+CREATE TABLE `offer` (
+  `id` int(11) NOT NULL,
+  `depature` date NOT NULL,
+  `arrive` date NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `coutry_code` varchar(3) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `comment` text NOT NULL,
+  `price` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `opinions`
 --
 
@@ -292,6 +311,13 @@ CREATE TABLE `testdrive` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- A tábla adatainak kiíratása `testdrive`
+--
+
+INSERT INTO `testdrive` (`id`, `plane_id`, `name`, `country_code`, `phone`, `email`, `address`, `experience`, `comment`, `created`) VALUES
+(0, 0, 'Török Ferenc', '36', '303947299', 'torokferi2004@gmail.com', '6636 Mártély Hunyadi utca 23', 1, 'Remélem jó', '2024-04-03 08:38:33');
+
+--
 -- Indexek a kiírt táblákhoz
 --
 
@@ -300,6 +326,22 @@ CREATE TABLE `testdrive` (
 --
 ALTER TABLE `checkout`
   ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `offer`
+--
+ALTER TABLE `offer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A kiírt táblák AUTO_INCREMENT értéke
+--
+
+--
+-- AUTO_INCREMENT a táblához `offer`
+--
+ALTER TABLE `offer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
