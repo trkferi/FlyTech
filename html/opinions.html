@@ -32,7 +32,11 @@
 						
 							<ul class="list-inline text-center">
 								<li class="list-inline-item">
-									<div class="rating">
+									<div class="rating" 
+										id="rating"
+										name="rating"
+										ng-model="model.rating"
+										ng-init="model.rating=null">
 										<input type="radio" id="star5" name="rating" value="5" />
 										<label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
 										<input type="radio" id="star4" name="rating" value="4" />

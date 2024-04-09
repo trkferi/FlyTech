@@ -233,16 +233,26 @@
 	'$timeout',
 	'http',
     function($scope, $timeout, http) {
-			// Get data
-			http.request('./data/opinions.json')
-			.then(response => {
 
-				// Set data, and apply change
-				$scope.data = response;
-				$scope.$applyAsync();
-			})
-			.catch(e => $timeout(() => { alert(e); }, 50));
 
+			// Set methods
+			let methods = {
+
+				// Reset
+				reset: (msg) => {
+
+					// Reset model, and apply change
+					Object.keys($scope.model).forEach(key => {
+						if (key === 'country_code')
+									$scope.model[key] = '36'
+
+					});
+					$scope.$applyAsync();
+
+					// Show message
+					$timeout(() => { alert(msg); }, 50);
+				}
+			};
 
 			// Apply for test drive
 			$scope.applyFor = () => {
@@ -250,7 +260,7 @@
 				// Http request
 				http.request({
 					method: 'POST',
-					url		: './php/opinions.php',
+					url		: './php/offer.php',
 					data	: $scope.model
 				})
 				.then(response => methods.reset(response))
