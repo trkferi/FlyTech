@@ -14,15 +14,15 @@ $args = Util::getArgs();
 // Connect to database
 $db = new Database();
 
-$price=(`depature` - `arrive`)*130000;
+
 
 // Set query
 $query = "INSERT INTO `offer` 
-					( `depature`, `arrive`, `name`, `country_code`, `phone`, `email`, `address`, `comment`, `$price` ) 
+					( `depature`, `arrive`, `name`, `country_code`, `phone`, `email`, `address`, `comment`, `price` ) 
 					VALUES";
 
 // Get date now
-$args['created'] = date("Y-m-d H:i:s");
+$args['price'] = 1350000;
 
 // Execute query
 $result = $db->execute($query, $args);
