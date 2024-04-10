@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 09. 11:59
+-- Létrehozás ideje: 2024. Ápr 10. 11:20
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -241,10 +241,28 @@ CREATE TABLE `offer` (
 --
 
 CREATE TABLE `opinions` (
+  `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `rating` int(5) NOT NULL,
   `review` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `opinions`
+--
+
+INSERT INTO `opinions` (`id`, `name`, `rating`, `review`) VALUES
+(1, 'Molnár Gréta', 5, 'A Sétarepülő Cég kiváló választás repülés szerelmeseinek. Profi, barátságos személyzet és modern gépek biztosítják a biztonságos és felejthetetlen élményt. Rugalmas foglalási lehetőségeik pedig még vonzóbbá teszik számomra. Ajánlom mindenkinek, aki szeretné felfedezni a repülés varázsát.'),
+(2, 'Gera Dániel', 2, 'A személyzetük kiválóan képzett és barátságos, mindig gondoskodnak arról, hogy az utasok biztonságban érezzék magukat és élvezzék a repülés élményét. A repülőgépek modern és jól karbantartottak, így biztosítva a kellemes és zavartalan repülést. Emellett a cég rugalmas foglalási lehetőségeket kínál, így könnyen alkalmazkodhatnak az utasok időbeosztásához és igényeihez. '),
+(3, 'Szekeres Ibolya', 4, 'Szuper személyzet és modern repülőgépek gondoskodnak a biztonságról és a kényelemről. Rugalmas foglalási lehetőségeik pedig még vonzóbbá teszik az utazást. Összességében nagyon pozitív tapasztalatokat szereztem velük és örömmel ajánlom másoknak is.'),
+(4, 'Kiss István', 5, 'Teljes mértékben elégedett vagyok velük, és bátran ajánlom mindenkinek, aki repülés közben szeretné magát biztonságban és kényelemben érezni.'),
+(5, 'Orsós Imre', 4, 'Fantasztikus élmény volt a repülés! A cég csapata nagyon profi és segítőkész volt, minden kérdésemre választ kaptam, és teljes mértékben biztonságban éreztem magam a repülés során.'),
+(6, 'Nagy János', 5, 'Csodálatos kilátások és lenyűgöző élmény! A repülőgép kifogástalan állapotban volt, és a pilóta nagyon hozzáértőnek és barátságosnak bizonyult. Mindenkinek ajánlom, aki szeretne egy felejthetetlen repülési élményben részt venni!'),
+(7, 'Móricz Anna', 5, 'Nagyszerű választás volt ez a cég! Rugalmasak voltak az időpontokkal, és mindent megtettek azért, hogy az élményünk tökéletes legyen. A pilóta szakértelme és az érdekességekkel teli információk tették még emlékezetesebbé a repülést.'),
+(8, 'Ferenczi Géza', 4, 'Lenyűgöző volt az egész repülés! A cég professzionális hozzáállása és a gyönyörű táj látványa feledhetetlen élménnyé tette az egészet. Mindenkinek javaslom, hogy kipróbálja ezt a repülési élményt, garantáltan megéri!'),
+(9, 'Andi', 2, 'Nagyon jóóóóóó'),
+(10, 'Attila', 5, 'Ügyes...'),
+(11, 'Rózsika', 4, 'A csúcson voltam!!!');
 
 -- --------------------------------------------------------
 
@@ -334,6 +352,12 @@ ALTER TABLE `offer`
   ADD PRIMARY KEY (`id`);
 
 --
+-- A tábla indexei `opinions`
+--
+ALTER TABLE `opinions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
 
@@ -342,6 +366,12 @@ ALTER TABLE `offer`
 --
 ALTER TABLE `offer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT a táblához `opinions`
+--
+ALTER TABLE `opinions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
