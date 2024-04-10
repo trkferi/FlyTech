@@ -34,18 +34,16 @@
 								<li class="list-inline-item">
 									<div class="rating" 
 										id="rating"
-										name="rating"
-										ng-model="model.rating"
-										ng-init="model.rating=null">
-										<input type="radio" id="star5" name="rating" value="5" />
+										name="rating">
+										<input type="radio" id="star5" name="rating" value="5" ng-model="model.star5" ng-init="model.star5=null">
 										<label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
-										<input type="radio" id="star4" name="rating" value="4" />
+										<input type="radio" id="star4" name="rating" value="4"  ng-model="model.star4" ng-init="model.star4=null">
 										<label class="star" for="star4" title="Great" aria-hidden="true"></label>
-										<input type="radio" id="star3" name="rating" value="3" />
+										<input type="radio" id="star3" name="rating" value="3"  ng-model="model.star3" ng-init="model.star3=null">
 										<label class="star" for="star3" title="Very good" aria-hidden="true"></label>
-										<input type="radio" id="star2" name="rating" value="2" />
+										<input type="radio" id="star2" name="rating" value="2"  ng-model="model.star2" ng-init="model.star2=null">
 										<label class="star" for="star2" title="Good" aria-hidden="true"></label>
-										<input type="radio" id="star1" name="rating" value="1" />
+										<input type="radio" id="star1" name="rating" value="1"  ng-model="model.star1" ng-init="model.star1=null">
 										<label class="star" for="star1" title="Bad" aria-hidden="true"></label>
 									  </div>
 								</li>
@@ -90,7 +88,7 @@
 					<div class="card-body">
 						<ul class="list-inline text-center">
 							<li class="list-inline-item"
-									ng-repeat="ratings in [].constructor(x.ratings) track by $index">
+									ng-repeat="ratings in [].constructor(x.rating) track by $index">
 								<i class="fas fa-star text-warning"></i>
 							</li>
 						</ul>

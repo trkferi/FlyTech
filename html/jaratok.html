@@ -7,20 +7,16 @@
 
     <div class="my-3 col-6">
       <select class="form-select"
-              ng-options="item as item.name for item in data track by item.name" 
+              ng-options="item as item for item in names track by item" 
               ng-model="model.selected">
-        <option hidden disabled selected value>
+        <option selected value>
           -- kérem válasszon --
         </option>
       </select>
     </div>
-    <div class="my-3 col-6" style="min-height:150px;">
-    </div>
   </div>
 
-  
-
-	<div class="row">
+	<div class="row mt-5">
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -28,9 +24,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-if="data && data.length"
+        <tr ng-if="data && data.length && 
+                  (!model.selected || model.selected === x.name)"
+            data-id="{{x.flights_id}}"
+            ng-click="toCart($event)"
             ng-repeat="x in data">
-          <td ng-repeat="(k, v) in x">{{v}}</td>
+          <td ng-repeat="(k, v) in x"
+              ng-if="!['name','flights_id'].includes(k)">{{v}}</td>
         </tr>
         <tr ng-if="!data || !data.length">
           <td colspan="{{header.length}}">üres</td>

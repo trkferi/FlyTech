@@ -6,18 +6,18 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 				  <tr>
-					<th scope="col">Név</th>
-					<th scope="col">db</th>
-					<th scope="col">Ár</th>
+						<th ng-repeat="(k, v) in header">{{v}}</th>
 				  </tr>
 				</thead>
 				<tbody>
-					<tr ng-if="data && data.length"
-						ng-repeat="x in data">
-				  	   <td ng-repeat=""></td>
+					<tr ng-if="$root.cart && $root.cart.length"
+							ng-repeat="x in $root.cart track by $index">
+				  	<td ng-repeat="(k, v) in header">
+							{{x[k]}}
+						</td>
 					</tr>
-					<tr ng-if="!data || !data.length">
-				  	   <td colspan="{{header.length}}">Kosár üres</td>
+					<tr ng-if="!$root.cart || !$root.cart.length">
+				  	<td colspan="{{header.length}}" class="text-center">Kosár üres</td>
 					</tr>
 				</tbody>
 			  </table>

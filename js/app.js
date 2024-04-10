@@ -92,8 +92,12 @@
 
   // Application run
   .run([
+		'$rootScope',
     'trans',
-    (trans) => {
+    ($rootScope, trans) => {
+
+			// Set global cart
+			$rootScope.cart = [];
 
       // Transaction events
 			trans.events('jaratok');
@@ -137,10 +141,12 @@
 	
 		// Járatok controller
 	  .controller('jaratokController', [
-			'$stateParams',
+		'$stateParams',
+		'$rootScope',
 		'$scope',
-			'http',
-		function($stateParams, $scope, http) {
+		'http',
+		'util',
+		function($stateParams, $rootScope, $scope, http, util) {
 	
 				// Set actual flight from state parameters
 				$scope.flight = $stateParams.flight;
@@ -160,11 +166,33 @@
 				})
 				.then(response => {
 					
-					// Set data
-					$scope.data = response;
+					// Set flights data, and names 
+					$scope.data = response.flights;
+					$scope.names = response.names;
 					$scope.$applyAsync();
 				})
-				.catch(error => alert(error));			
+				.catch(error => alert(error));
+				
+				// To cart
+				$scope.toCart = (event) => {
+					let element = event.currentTarget,
+							id 			= parseInt(element.dataset.id),
+							index   = util.indexByKeyValue($scope.data, 'flights_id', id);
+					if (index !== -1) {
+						let item = util.cloneVariable($scope.data[index]);
+						item.db  = 1;
+
+						let uzenet = "fffr ?\n";
+						Object.keys(item).forEach((k) => {
+							if (['name','price','start'].includes(k)) 
+								uzenet += `\n${k}: ${item[k]}`;
+						});
+
+						if (confirm(uzenet)) {
+							$rootScope.cart.push(item);
+						}
+					}
+				}
 			}
 		])
 	
@@ -319,7 +347,7 @@
     function($scope, $timeout, http) {
 
 			// Get data
-			http.request('./data/opinions.json')
+			http.request('./php/get_optons.php')
 			.then(response => {
 
 				// Set data, and apply change
@@ -349,13 +377,31 @@
 			// Apply for test drive
 			$scope.applyFor = () => {
 
+				let rating = 0;
+				for(let i = 1; i <= 5; i++) {
+					if ($scope.model[`star${i}`]) {
+						rating = parseInt($scope.model[`star${i}`]);
+						break;
+					}
+				}
+
+				let args = {
+					name: $scope.model.name,
+					rating: rating,
+					review: $scope.model.review
+				};
+
 				// Http request
 				http.request({
 					method: 'POST',
 					url		: './php/opinions.php',
-					data	: $scope.model
+					data	: args
 				})
-				.then(response => methods.reset(response))
+				.then(response => {
+					methods.reset(response);
+					$scope.data.push(args);
+					$scope.$applyAsync();
+				})
 				.catch(error => methods.reset(error));
 			}
 		}
@@ -369,6 +415,13 @@
 		'$timeout',
 		'http',
     function($scope, $timeout, http) {
+
+			// Table header
+			$scope.header = {
+				name: "Név",
+				db: "db",
+				price: "Ár"
+			};
 
 		// Set methods
 		let methods = {
