@@ -33,7 +33,8 @@ $query = "SELECT  `flights_id`,
 $result['flights'] = $db->execute($query, $args);
 
 // Set query 
-$query = "SELECT DISTINCT `name`
+$query = "SELECT DISTINCT `name`,
+                          `direction`
                      FROM `flights` 
                     WHERE `starting_id` = :id AND
                           `start` > :start";

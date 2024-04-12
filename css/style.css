@@ -253,3 +253,7 @@ footer li{
   color: #FECE31;
   
 }
+.cartCount{
+  background-color: red;
+  border-radius: 50px;
+}
