@@ -17,7 +17,7 @@
 						</td>
 					</tr>
 					<tr ng-if="!$root.cart || !$root.cart.length">
-				  	<td colspan="{{header.length}}" class="text-center">Kosár üres</td>
+				  	<td colspan="3" class="text-center">Kosár üres</td>
 					</tr>
 				</tbody>
 			  </table>
@@ -66,7 +66,7 @@
 									id="phone"
 									name="phone" 
 									type="text"
-									style="max-width:150px;"
+									style="max-width:100px;"
 									spellcheck="false" 
 									autocomplete="off"
 									maxlength="10"
@@ -118,7 +118,7 @@
 									 type="text"
 									 spellcheck="false" 
 									 autocomplete="off"
-									 maxlength="100"
+									 maxlength="19"
 									 ng-model="model.cardNumber"
 									 ng-init="model.cardNumber=null"
 									 placeholder="XXXX-XXXX-XXXX-XXXX"
@@ -151,7 +151,7 @@
 									 type="text"
 									 spellcheck="false" 
 									 autocomplete="off"
-									 maxlength="100"
+									 maxlength="5"
 									 ng-model="model.expiration"
 									 ng-init="model.expiration=null"
 									 required>
@@ -165,7 +165,7 @@
 									 type="text"
 									 spellcheck="false" 
 									 autocomplete="off"
-									 maxlength="100"
+									 maxlength="3"
 									 ng-model="model.cvc"
 									 ng-init="model.cvc=null"
 									 required>

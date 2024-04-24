@@ -27,13 +27,15 @@ $query = "SELECT  `flights_id`,
                   `start`
             FROM `flights` 
             WHERE `starting_id` = :id AND
-                  `start` > :start";
+                  `start` > :start 
+                  ORDER BY `start` ASC";
             
 // Execute query with argument
 $result['flights'] = $db->execute($query, $args);
 
 // Set query 
-$query = "SELECT DISTINCT `name`
+$query = "SELECT DISTINCT `name`,
+                          `direction`            
                      FROM `flights` 
                     WHERE `starting_id` = :id AND
                           `start` > :start";

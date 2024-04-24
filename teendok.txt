@@ -1,0 +1,11 @@
+Checkout oldal:
+    - kosár összegének kiírása
+    - kosárból lehessen törölni
+    - fizetéskor a kosár üríése
+
+Offer oldal
+    - ajánlat felvitele adatbázisba (működött de valami most nem jó)
+    - confirm-mel az ajánlat elfogadása, ha elfogadjuk kosárba rakni
+
+Jaratok oldal
+    - Ha a legördülőben kiválasztjuk a körjáratot egy h2-be írja ki a hozzátartozó direction-t

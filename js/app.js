@@ -182,7 +182,7 @@
 						let item = util.cloneVariable($scope.data[index]);
 						item.db  = 1;
 
-						let uzenet = "fffr ?\n";
+						let uzenet = "Kosárba szeretnéd tenni?\n";
 						Object.keys(item).forEach((k) => {
 							if (['name','price','start'].includes(k)) 
 								uzenet += `\n${k}: ${item[k]}`;
@@ -285,14 +285,83 @@
 			// Apply for test drive
 			$scope.applyFor = () => {
 
+
+				 let depature = new Date($scope.model.depature);
+				 let arrive = new Date($scope.model.arrive);
+				  
+				 // Calculating the time difference
+				 // of two dates
+				 let Difference_In_Time =
+				 arrive.getTime() - depature.getTime();
+				  
+				 // Calculating the no. of days between
+				 // two dates
+				 let days =
+					 Math.round
+						 (Difference_In_Time / (1000 * 3600 * 24));
+				  
+				 
+				var price =days * 1300000;
+				
+
+
+
+				let args = {
+					name: "Magán repülő: " + days + " nap",
+					depature: $scope.model.depature,
+					arrive: $scope.model.arrive,
+					u_name: $scope.model.name,
+					country_code: $scope.model.country_code,
+					phone: $scope.model.phone,
+					email: $scope.model.email,
+					address: $scope.model.address,
+					comment: $scope.model.comment,
+					price: price,
+
+				};
+
 				// Http request
 				http.request({
 					method: 'POST',
 					url		: './php/offer.php',
-					data	: $scope.model
+					data	: args
 				})
 				.then(response => methods.reset(response))
 				.catch(error => methods.reset(error));
+
+
+				// Http request
+				http.request({
+					url: './php/get_offer.php',
+					data: {id: $scope.offer.id}
+				})
+				.then(response => {
+					
+					// Set offer
+					$scope.data = response.offer;
+					$scope.$applyAsync();
+				})
+				.catch(error => alert(error));
+
+
+				$scope.toCart = (event) => {
+					let element = event.currentTarget,
+							id 			= parseInt(element.dataset.id),
+							index   = util.indexByKeyValue($scope.data, 'id', id);
+					if (index !== -1) {
+						let item = util.cloneVariable($scope.data[index]);
+						item.db  = 1;
+
+						let uzenet = "Kosárba szeretnéd tenni?";
+						
+
+						if (confirm(uzenet)) {
+							$rootScope.cart.push(item);
+						}
+					}
+				}
+
+
 			}
 		}
 	])
@@ -419,7 +488,7 @@
 			// Table header
 			$scope.header = {
 				name: "Név",
-				db: "db",
+				start: "Indulás",
 				price: "Ár"
 			};
 
