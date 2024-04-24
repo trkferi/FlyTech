@@ -1,5 +1,6 @@
 Checkout oldal:
     - kosár összegének kiírása
+    - kosárból lehessen törölni
     - fizetéskor a kosár üríése
 
 Offer oldal
