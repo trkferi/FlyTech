@@ -488,7 +488,7 @@
 			// Table header
 			$scope.header = {
 				name: "Név",
-				db: "db",
+				start: "Indulás",
 				price: "Ár"
 			};
 
