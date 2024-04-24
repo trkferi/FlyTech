@@ -58,6 +58,34 @@ p, li{
   background-size: cover;
   
 }
+.Dunakeszi-banner{
+  background-image: url(../pics/dunakeszibanner.jpg);
+  height: 400px;
+  background-position: center center;
+  background-size: cover;
+  
+}
+.Hévíz-banner{
+  background-image: url(../pics/hevizbanner.jpg);
+  height: 400px;
+  background-position: center center;
+  background-size: cover;
+  
+}
+.Debrecen-banner{
+  background-image: url(../pics/debrecenbanner.jpg);
+  height: 400px;
+  background-position: center center;
+  background-size: cover;
+  
+}
+.Szeged-banner{
+  background-image: url(../pics/szegedbanner.jpg);
+  height: 400px;
+  background-position: center center;
+  background-size: cover;
+  
+}
 .bannerajanlatkeres{
   background-image: url(../pics/ajanlatkeresbanner.jpg);
   height: 600px;
