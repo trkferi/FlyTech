@@ -18,11 +18,7 @@ p, li{
   background-color: #A4D2EF;
 }
 
-.kosar{
-    height: 40px;
-    width: 40px;
-  
-}
+
 .bannerfooldal{
     background-image: url(../pics/fooldalbanner.jpg);
     height: 400px;
@@ -122,10 +118,6 @@ h3{
 .felsorolas
 {
     text-align: justify;
-
-}
-h2{
-    text-align: center;
 }
 footer{
   height: auto;
