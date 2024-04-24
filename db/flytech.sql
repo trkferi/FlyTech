@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 12. 12:11
+-- Létrehozás ideje: 2024. Ápr 24. 10:27
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -40,6 +40,13 @@ CREATE TABLE `checkout` (
   `expiration` varchar(5) NOT NULL,
   `cvc` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `checkout`
+--
+
+INSERT INTO `checkout` (`id`, `name`, `country_code`, `phone`, `email`, `address`, `card_number`, `card_name`, `expiration`, `cvc`) VALUES
+(4, 'Török Ferenc', '36', '303947299', 'torok.ferenc-2019@keri.mako.hu', '6636 Mártély Hunyadi utca 23.', '1111-2222-3333-4444', 'Török Ferenc', '24/06', 255);
 
 -- --------------------------------------------------------
 
@@ -197,6 +204,13 @@ CREATE TABLE `newsletter` (
   `ended` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- A tábla adatainak kiíratása `newsletter`
+--
+
+INSERT INTO `newsletter` (`id`, `email`, `begin`, `ended`) VALUES
+(0, 'torok.ferenc-2019@keri.mako.hu', '2024-04-24 10:26:48', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -268,18 +282,17 @@ CREATE TABLE `planes` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `seats` int(11) NOT NULL,
-  `img` varchar(20) NOT NULL,
-  `day_price` int(11) NOT NULL
+  `img` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `planes`
 --
 
-INSERT INTO `planes` (`id`, `name`, `seats`, `img`, `day_price`) VALUES
-(1, 'Hawker 400xp', 7, 'hawker.jpg', 0),
-(2, 'King air 250', 8, 'king_air.jpg', 0),
-(3, 'Citation Mustang', 7, 'citation_mustang.jpg', 0);
+INSERT INTO `planes` (`id`, `name`, `seats`, `img`) VALUES
+(1, 'Hawker 400xp', 7, 'hawker.jpg'),
+(2, 'King air 250', 8, 'king_air.jpg'),
+(3, 'Citation Mustang', 7, 'citation_mustang.jpg');
 
 -- --------------------------------------------------------
 
@@ -354,6 +367,12 @@ ALTER TABLE `opinions`
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
+
+--
+-- AUTO_INCREMENT a táblához `checkout`
+--
+ALTER TABLE `checkout`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `offer`
