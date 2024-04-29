@@ -20,7 +20,13 @@
 				  	<td colspan="3" class="text-center">Kosár üres</td>
 					</tr>
 				</tbody>
-			  </table>
+				<tfoot ng-if="$root.cart && $root.cart.length">
+					<tr>
+						<td colspan="2" class="text-end">Összesen:</td>
+						<td>{{$root.sum}}</td>
+					</tr>
+				</tfoot>
+			</table>
 		</div>
 
 

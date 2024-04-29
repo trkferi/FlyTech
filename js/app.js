@@ -98,6 +98,7 @@
 
 			// Set global cart
 			$rootScope.cart = [];
+			$rootScope.sum  = 0;
 
       // Transaction events
 			trans.events('jaratok');
@@ -176,7 +177,7 @@
 				// To cart
 				$scope.toCart = (event) => {
 					let element = event.currentTarget,
-							id 			= parseInt(element.dataset.id),
+							id 			= element.dataset.id,
 							index   = util.indexByKeyValue($scope.data, 'flights_id', id);
 					if (index !== -1) {
 						let item = util.cloneVariable($scope.data[index]);
@@ -190,6 +191,7 @@
 
 						if (confirm(uzenet)) {
 							$rootScope.cart.push(item);
+							$rootScope.sum += parseInt(item.price);
 						}
 					}
 				}
