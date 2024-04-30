@@ -1,4 +1,4 @@
-jaratok sor kiemelése egér felett  !!!
+jaratok sor kiemelése egér felett OK
 
 Checkout oldal:
     - kosár összegének kiírása  OK
