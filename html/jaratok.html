@@ -21,14 +21,15 @@
     <h2>{{model.selected}}</h2>
   </div>
 	<div class="row mt-5">
-    <table class="table table-bordered table-striped jaratok">
+    <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
           <th ng-repeat="x in header">{{x}}</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-if="data && data.length && 
+        <tr class="cursor-pointer"
+            ng-if="data && data.length && 
                   (!model.selected || model.selected === x.name)"
             data-id="{{x.flights_id}}"
             ng-click="toCart($event)"
