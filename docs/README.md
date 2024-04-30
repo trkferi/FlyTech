@@ -2,6 +2,7 @@
 
 
 ## Készítette: Török Ferenc és Vörös Alexandra
+## Projektfelelős: Török Ferenc
 # Források: 
 __Képek:__
 - https://pixabay.com/hu/
