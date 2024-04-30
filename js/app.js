@@ -310,9 +310,9 @@
 
 				let args = {
 					name: "Magán repülő: " + days + " nap",
-					depature: $scope.model.depature,
-					arrive: $scope.model.arrive,
-					u_name: $scope.model.name,
+					depature: moment($scope.model.depature).format('YYYY-MM-DD'),
+					arrive: moment($scope.model.arrive).format('YYYY-MM-DD'),
+					u_name: $scope.model.u_name,
 					country_code: $scope.model.country_code,
 					phone: $scope.model.phone,
 					email: $scope.model.email,
@@ -481,7 +481,7 @@
 
 
 	// Cart controller
-  	.controller('cartController', [
+  .controller('cartController', [
 		'$rootScope',
     '$scope',
 		'$timeout',
