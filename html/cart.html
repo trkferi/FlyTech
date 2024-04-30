@@ -3,7 +3,7 @@
 		<h1 class="text-center">Kosár</h1>
 		
 		<div class="col-md-6">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped table-hover">
 				<thead>
 				  <tr>
 						<th ng-repeat="(k, v) in header">{{v}}</th>
@@ -12,24 +12,26 @@
 				</thead>
 				<tbody>
 					<tr ng-if="$root.cart && $root.cart.length"
-							ng-repeat="x in $root.cart track by $index">
+							ng-repeat="x in $root.cart track by $index"
+							data-index="{{$index}}">
 				  	<td ng-repeat="(k, v) in header">
 							{{x[k]}}
 						</td>
-						<td>
-							<button type="button" class="btn btn-outline-danger">
+						<td class="px-0 text-center">
+							<button type="button" class="btn btn-outline-danger"
+											ng-click="deleteCartItem($event)">
 								töröl
 							</button>
 						</td>
 					</tr>
 					<tr ng-if="!$root.cart || !$root.cart.length">
-				  	<td colspan="3" class="text-center">Kosár üres</td>
+				  	<td colspan="4" class="text-center">Kosár üres</td>
 					</tr>
 				</tbody>
 				<tfoot ng-if="$root.cart && $root.cart.length">
 					<tr>
 						<td colspan="2" class="text-end">Összesen:</td>
-						<td>{{$root.sum}}</td>
+						<td colspan="2">{{$root.sum}}</td>
 					</tr>
 				</tfoot>
 			</table>
@@ -188,7 +190,7 @@
 				<div class="my-4 text-end">
 					<button type="button" 
 									class="btn btn-primary px-5"
-									ng-disabled="dataApplyFor.$invalid"
+									ng-disabled="dataApplyFor.$invalid || !$root.sum"
 									ng-click="applyFor()">
 						Fizetés
 					</button>

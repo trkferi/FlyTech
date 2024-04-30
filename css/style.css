@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Josefin+Sans:wght@500&family=Kristi&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Josefin+Sans:wght@500&family=Kristi&family=Zilla+Slab:wght@300&display=swap');
 
+table.jaratok tbody tr:hover {
+  background-color: lightskyblue !important;
+}
 .navbar-brand{
   font-family:'kristi';
 }

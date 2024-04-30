@@ -101,7 +101,7 @@
 			$rootScope.sum  = 0;
 
       // Transaction events
-			trans.events('jaratok');
+			trans.events('jaratok,cart');
     }
   ])
 
@@ -482,10 +482,11 @@
 
 	// Cart controller
   	.controller('cartController', [
+		'$rootScope',
     '$scope',
 		'$timeout',
 		'http',
-    function($scope, $timeout, http) {
+    function($rootScope, $scope, $timeout, http) {
 
 			// Table header
 			$scope.header = {
@@ -494,25 +495,29 @@
 				price: "Ár"
 			};
 
-		// Set methods
-		let methods = {
+			// Set methods
+			let methods = {
 
-			// Reset
-			reset: (msg) => {
+				// Reset
+				reset: (msg) => {
 
-				// Reset model, and apply change
-				Object.keys($scope.model).forEach(key => {
-					if (key === 'country_code')
-								$scope.model[key] = '36'
+					// Reset model, and apply change
+					Object.keys($scope.model).forEach(key => {
+						if (key === 'country_code')
+									$scope.model[key] = '36'
 
-					else 	$scope.model[key] = null
-				});
-				$scope.$applyAsync();
+						else 	$scope.model[key] = null
+					});
+					$scope.$applyAsync();
 
-				// Show message
-				$timeout(() => { alert(msg); }, 50);
-			}
-		};
+					// Set global cart
+					$rootScope.cart = [];
+					$rootScope.sum  = 0;
+
+					// Show message
+					$timeout(() => { alert(msg); }, 50);
+				}
+			};
 
 			// Apply for test drive
 			$scope.applyFor = () => {
@@ -526,6 +531,15 @@
 				.then(response => methods.reset(response))
 				.catch(error => methods.reset(error));
 			}
+
+			// Delete cart item
+			$scope.deleteCartItem = (event) => {
+				let element = event.currentTarget,
+						index   = parseInt(element.closest('tr').dataset.index);
+				$rootScope.sum -= parseInt($rootScope.cart[index].price);
+				$rootScope.cart.splice(index, 1);
+				$rootScope.$applyAsync();
+			};
 		}
 	])
 
