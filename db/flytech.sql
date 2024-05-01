@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 24. 10:27
+-- Létrehozás ideje: 2024. Máj 01. 23:26
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -37,7 +37,7 @@ CREATE TABLE `checkout` (
   `address` text NOT NULL,
   `card_number` varchar(19) NOT NULL,
   `card_name` varchar(20) NOT NULL,
-  `expiration` varchar(5) NOT NULL,
+  `expiration` varchar(7) NOT NULL,
   `cvc` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -46,7 +46,32 @@ CREATE TABLE `checkout` (
 --
 
 INSERT INTO `checkout` (`id`, `name`, `country_code`, `phone`, `email`, `address`, `card_number`, `card_name`, `expiration`, `cvc`) VALUES
-(4, 'Török Ferenc', '36', '303947299', 'torok.ferenc-2019@keri.mako.hu', '6636 Mártély Hunyadi utca 23.', '1111-2222-3333-4444', 'Török Ferenc', '24/06', 255);
+(1, 'Ódry Attila', '36', '701234123', 'odry.attila@keri.mako.hu', 'Szeged', '1111111111111111111', 'Ódry Attila', '2025/03', 123);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `checkout_row`
+--
+
+CREATE TABLE `checkout_row` (
+  `id` int(11) NOT NULL,
+  `checkout_id` int(11) NOT NULL,
+  `flights_id` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `checkout_row`
+--
+
+INSERT INTO `checkout_row` (`id`, `checkout_id`, `flights_id`, `price`, `quantity`, `total`) VALUES
+(1, 1, 49, 40000, 3, 120000),
+(2, 1, 56, 40000, 2, 80000),
+(3, 1, 70, 42000, 1, 42000),
+(4, 1, 63, 40000, 1, 40000);
 
 -- --------------------------------------------------------
 
@@ -240,7 +265,8 @@ INSERT INTO `offer` (`id`, `name`, `depature`, `arrive`, `u_name`, `country_code
 (2, '', '2024-04-12', '2024-04-13', 'asdasd', '36', '234234234', 'asdasd@asd.com', 'adasd', 'asasd', 86400000),
 (3, '', '2024-04-12', '2024-04-13', 'asd', '36', '23423434', 'asd@asd.com', 'adasd', 'asdasd', 1300000),
 (4, 'Magán repülő: 7 nap', '2024-04-12', '2024-04-19', 'asd', '36', '3423423234', 'aasd@asd.com', 'asdasd', 'adasd', 9100000),
-(5, 'Magán repülő: 6 nap', '2024-04-13', '2024-04-19', 'asd', '36', '23423423', 'asd@asd.com', 'dasd', 'asdasdasd', 7800000);
+(5, 'Magán repülő: 6 nap', '2024-04-13', '2024-04-19', 'asd', '36', '23423423', 'asd@asd.com', 'dasd', 'asdasdasd', 7800000),
+(6, 'Magán repülő: 2 nap', '2024-04-30', '2024-05-02', 'Atika', '36', '32332323', 'a@a.aa', 'Szeged', 'sasasasasa', 2600000);
 
 -- --------------------------------------------------------
 
@@ -353,6 +379,18 @@ ALTER TABLE `checkout`
   ADD PRIMARY KEY (`id`);
 
 --
+-- A tábla indexei `checkout_row`
+--
+ALTER TABLE `checkout_row`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `flights`
+--
+ALTER TABLE `flights`
+  ADD PRIMARY KEY (`flights_id`);
+
+--
 -- A tábla indexei `offer`
 --
 ALTER TABLE `offer`
@@ -372,13 +410,25 @@ ALTER TABLE `opinions`
 -- AUTO_INCREMENT a táblához `checkout`
 --
 ALTER TABLE `checkout`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT a táblához `checkout_row`
+--
+ALTER TABLE `checkout_row`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT a táblához `flights`
+--
+ALTER TABLE `flights`
+  MODIFY `flights_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT a táblához `offer`
 --
 ALTER TABLE `offer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `opinions`

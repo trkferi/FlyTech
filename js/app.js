@@ -142,13 +142,23 @@
 	
 		// Járatok controller
 	  .controller('jaratokController', [
+		'$state',
 		'$stateParams',
 		'$rootScope',
 		'$scope',
 		'http',
 		'util',
-		function($stateParams, $rootScope, $scope, http, util) {
+		function($state, $stateParams, $rootScope, $scope, http, util) {
 	
+				// Check state parameters not exist
+				if (!$stateParams.flight) {
+
+					// Check ignored states
+          if ($rootScope.ignoredStates.includes($rootScope.state.prev))
+					      $state.go('home');
+          else  $rootScope.goToPreviousState();
+				}
+
 				// Set actual flight from state parameters
 				$scope.flight = $stateParams.flight;
 				
@@ -174,26 +184,54 @@
 				})
 				.catch(error => alert(error));
 				
-				// To cart
-				$scope.toCart = (event) => {
-					let element = event.currentTarget,
-							id 			= element.dataset.id,
-							index   = util.indexByKeyValue($scope.data, 'flights_id', id);
-					if (index !== -1) {
-						let item = util.cloneVariable($scope.data[index]);
-						item.db  = 1;
-
-						let uzenet = "Kosárba szeretnéd tenni?\n";
-						Object.keys(item).forEach((k) => {
-							if (['name','price','start'].includes(k)) 
-								uzenet += `\n${k}: ${item[k]}`;
-						});
-
-						if (confirm(uzenet)) {
-							$rootScope.cart.push(item);
-							$rootScope.sum += parseInt(item.price);
+				// Confirm
+				$scope.confirm = (event) => {
+					let element 			= event.currentTarget,
+							id 						= parseInt(element.dataset.id),
+							index   			= util.indexByKeyValue($scope.data, 'flights_id', id),
+							modalElement	= document.querySelector('#confirmModal');
+					if (index !== -1 && modalElement) {
+						$scope.model = {quantity: 1};
+						$scope.item = {
+							"Helyiség": $scope.flight.city,
+							"Járat": $scope.data[index].name,
+							"Járatszám": $scope.data[index].flights_id,
+							"Irány": $scope.data[index].direction,
+							"Távolság (km)": $scope.data[index].distance,
+							"Időtartam (perc)": $scope.data[index].period,
+							"Dátum": $scope.data[index].start.substr(0, 10),
+							"Indulás": $scope.data[index].start.slice(-5),
+							"Egységár (Ft)": util.mumberToStringThousandSeparator($scope.data[index].price),
+							"Hely (db)": 1,
+							"Össesen (Ft)": $scope.data[index].price
 						}
+						$scope.$applyAsync();
+						let modal = new bootstrap.Modal(modalElement); 
+						modal.show();
 					}
+				}
+
+				// Flight to cart
+				$scope.flightToCart = () => {
+					let price = parseInt($scope.item["Egységár (Ft)"].replace(/\s/g,'')),
+							total = $scope.model.quantity * price,
+							item 	= {
+												city: $scope.item["Helyiség"],
+												flights_id: $scope.item["Járatszám"],
+												name: $scope.item["Járat"],
+												start: $scope.item["Dátum"] + " " + $scope.item["Indulás"],
+												quantity: $scope.model.quantity,
+												price: price,
+												total: total 
+											};
+					
+					let index = util.indexByKeyValue($rootScope.cart, 'flights_id', item.flights_id);
+					if (index !== -1) {
+									$rootScope.cart[index].quantity += item.quantity;
+									$rootScope.cart[index].total += item.total;
+					} else 	$rootScope.cart.push(item);
+					$rootScope.sum += total;
+					$rootScope.$applyAsync();
 				}
 			}
 		])
@@ -482,18 +520,35 @@
 
 	// Cart controller
   .controller('cartController', [
+		'$state',
 		'$rootScope',
     '$scope',
 		'$timeout',
 		'http',
-    function($rootScope, $scope, $timeout, http) {
+		'util',
+    function($state, $rootScope, $scope, $timeout, http, util) {
 
 			// Table header
 			$scope.header = {
-				name: "Név",
+				city: "Helyiség",
+				flights_id: "Járatszám",
+				name: "Járat",
 				start: "Indulás",
-				price: "Ár"
+				price: "Egységár (Ft)",
+				quantity: "Hely (db)",
+				total: "Össesen (Ft)"
 			};
+
+			// Get current date, year, month
+      let currentDate 	= new Date(),	
+					currentYear 	= currentDate.getFullYear(),
+					currentMonth	= currentDate.getMonth() + 1;
+
+			// Set years
+      $scope.years	= Array.from({length: 11}, (_, i) => currentYear + i);
+
+			// Set months
+      $scope.months = Array.from({length: 12}, (_, i) => (i+1).toString().padStart(2,'0'));
 
 			// Set methods
 			let methods = {
@@ -505,7 +560,6 @@
 					Object.keys($scope.model).forEach(key => {
 						if (key === 'country_code')
 									$scope.model[key] = '36'
-
 						else 	$scope.model[key] = null
 					});
 					$scope.$applyAsync();
@@ -513,6 +567,12 @@
 					// Set global cart
 					$rootScope.cart = [];
 					$rootScope.sum  = 0;
+					$rootScope.$applyAsync();
+
+					// Check ignored states
+          if ($rootScope.ignoredStates.includes($rootScope.state.prev))
+					      $state.go('home');
+          else  $rootScope.goToPreviousState();
 
 					// Show message
 					$timeout(() => { alert(msg); }, 50);
@@ -521,22 +581,52 @@
 
 			// Apply for test drive
 			$scope.applyFor = () => {
+				
+				// Check credit card expiration
+				if ($scope.model.year === currentYear &&
+						parseInt($scope.model.month) < currentMonth) {
+					alert('A hitelkártya lejárt!');
+					return;
+				}
+
+				// Get neccesary input properties
+				let args = util.objFilterByKeys($scope.model, [
+					'year',
+					'month',
+				], false);
+
+				// Set card expiration
+				args.expiration = $scope.model.year + '/' + $scope.model.month;
+
+				// Get neccesary cart properties
+				let cart = util.arrayObjFilterByKeys($rootScope.cart, [
+					'flights_id',
+					'price',
+					'quantity',
+					'total'
+				]);
 
 				// Http request
 				http.request({
 					method: 'POST',
 					url		: './php/cart.php',
-					data	: $scope.model
+					data	: {
+						data: args,
+						cart: cart
+					}
 				})
 				.then(response => methods.reset(response))
-				.catch(error => methods.reset(error));
+				.catch(error => {
+					$timeout(() => { alert(error); }, 50);
+				});
 			}
 
 			// Delete cart item
 			$scope.deleteCartItem = (event) => {
+				if (!confirm('Biztos eltávolítja a kosárból?')) return;
 				let element = event.currentTarget,
 						index   = parseInt(element.closest('tr').dataset.index);
-				$rootScope.sum -= parseInt($rootScope.cart[index].price);
+				$rootScope.sum -= parseInt($rootScope.cart[index].total);
 				$rootScope.cart.splice(index, 1);
 				$rootScope.$applyAsync();
 			};

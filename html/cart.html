@@ -1,201 +1,232 @@
-<div class="container">
-	<div class="row mt-5">
+<div class="container-fluid">
+	<div class="row mt-5 justify-content-center">
 		<h1 class="text-center">Kosár</h1>
 		
-		<div class="col-md-6">
-			<table class="table table-bordered table-striped table-hover">
+		<div class="col-12 col-lg-11 col-xxl-10">
+			<table class="table table-bordered table-striped table-hover mt-3">
 				<thead>
-				  <tr>
-						<th ng-repeat="(k, v) in header">{{v}}</th>
+					<tr>
+						<th class="text-nowrap"
+								ng-class="{'text-end': ['flights_id','quantity','price','total'].includes(k)}" 
+								ng-repeat="(k, v) in header">
+							{{v}}
+						</th>
 						<th></th>
-				  </tr>
+					</tr>
 				</thead>
 				<tbody>
 					<tr ng-if="$root.cart && $root.cart.length"
 							ng-repeat="x in $root.cart track by $index"
 							data-index="{{$index}}">
-				  	<td ng-repeat="(k, v) in header">
-							{{x[k]}}
+						<td ng-class="{'text-end': ['flights_id','quantity','price','total'].includes(k)}"
+								ng-repeat="(k, v) in header">
+							{{['flights_id','quantity','price','total'].includes(k) ? (x[k] | numSep) : x[k]}}
 						</td>
-						<td class="px-0 text-center">
-							<button type="button" class="btn btn-outline-danger"
-											ng-click="deleteCartItem($event)">
+						<td class="text-center">
+							<span class="cursor-pointer text-danger" 
+								ng-click="deleteCartItem($event)">
 								töröl
-							</button>
+							</span>
 						</td>
 					</tr>
 					<tr ng-if="!$root.cart || !$root.cart.length">
-				  	<td colspan="4" class="text-center">Kosár üres</td>
+						<td colspan="8" class="text-center">A kosár üres</td>
 					</tr>
 				</tbody>
 				<tfoot ng-if="$root.cart && $root.cart.length">
 					<tr>
-						<td colspan="2" class="text-end">Összesen:</td>
-						<td colspan="2">{{$root.sum}}</td>
+						<th colspan="6" class="text-end">Mindösszesen:</th>
+						<th class="text-end">{{$root.sum | numSep}}</th>
+						<th></th>
 					</tr>
 				</tfoot>
 			</table>
 		</div>
 
+		<form name="dataApplyFor" 
+					class="mt-3 col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
+	
+			<div class="row">
 
-		<div class="col-12 col-sm-11 col-md-10 col-lg-6 col-xl-6 justify-content-end mb-3">
-			<form name="dataApplyFor" 
-						>
-	
-				<div class="row">
-					<div class="mb-3 col-6">
-						<!-- name -->
-						<label for="name" class="form-label">Név:</label>
-						<input class="form-control"
-									 id="name"
-									 name="name" 
-									 type="text"
-									 spellcheck="false" 
-									 autocomplete="off"
-									 maxlength="100"
-									 ng-model="model.name"
-									 ng-init="model.name=null"
-									 required>
-					</div> 
-					<div class="mb-3 col-6">
-						<label for="country_code" class="form-label">Telefonszám:</label><br>
-	
-						<!-- Country code -->
-						<span>+</span>
-						<input class="form-control d-inline-block mx-1"
-									id="country_code"
-									name="country_code" 
-									type="text"
-									style="max-width:45px;"
-									spellcheck="false" 
-									autocomplete="off"
-									maxlength="3"
-									ng-model="model.country_code"
-									ng-init="model.country_code='36'"
-									ng-pattern="/^$|^(?!(0))[0-9]{1,3}$/"
-									required>
-	
-						<!-- Phone -->
-						<input class="form-control d-inline-block"
-									id="phone"
-									name="phone" 
-									type="text"
-									style="max-width:100px;"
-									spellcheck="false" 
-									autocomplete="off"
-									maxlength="10"
-									ng-model="model.phone"
-									ng-init="model.phone=null"
-									ng-pattern="/^$|^(?!(0))[0-9]{7,10}$/"
-									required>
-					</div>
-			</div>
-	
-				<!-- Email -->
-				<div class="mb-3">
-					<label for="email" class="form-label">Email:</label>
+				<!-- name -->
+				<div class="mb-3 col-12 col-md-6">
+					<label for="name" class="form-label">Név:</label>
 					<input class="form-control"
-								 id="email"
-								 name="email" 
-								 type="email"
-								 spellcheck="false" 
-								 autocomplete="off"
-								 maxlength="50"
-								 ng-model="model.email"
-								 ng-init="model.email=null"
-								 ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
-								 required>
-				</div>
-	
-				<!-- Address -->
-				<div class="mb-3">
-					<label for="address" class="form-label">Lakcím:</label>
-					<input class="form-control"
-								 id="address"
-								 name="address" 
+								 id="name"
+								 name="name" 
 								 type="text"
 								 spellcheck="false" 
 								 autocomplete="off"
-								 maxlength="200"
-								 ng-model="model.address"
-								 ng-init="model.address=null"
+								 maxlength="100"
+								 ng-model="model.name"
+								 ng-init="model.name=null"
+								 required>
+				</div> 
+
+				<!-- Country code -->
+				<div class="mb-3 col-12 col-md-6">
+					<label for="country_code" class="form-label">Telefonszám:</label><br>
+					<span>+</span>
+					<input class="form-control d-inline-block mx-1"
+								id="country_code"
+								name="country_code" 
+								type="text"
+								style="max-width:45px;"
+								spellcheck="false" 
+								autocomplete="off"
+								maxlength="3"
+								ng-model="model.country_code"
+								ng-init="model.country_code='36'"
+								ng-pattern="/^$|^(?!(0))[0-9]{1,3}$/"
+								required>
+	
+					<!-- Phone -->
+					<input class="form-control d-inline-block"
+								id="phone"
+								name="phone" 
+								type="text"
+								style="max-width:150px;"
+								spellcheck="false" 
+								autocomplete="off"
+								maxlength="10"
+								ng-model="model.phone"
+								ng-init="model.phone=null"
+								ng-pattern="/^$|^(?!(0))[0-9]{7,10}$/"
+								required>
+				</div>
+			</div>
+	
+			<div class="row">
+
+				<!-- Email -->
+				<div class="mb-3 col-12 col-md-6">
+					<label for="email" class="form-label">Email:</label>
+					<input class="form-control"
+								id="email"
+								name="email" 
+								type="email"
+								spellcheck="false" 
+								autocomplete="off"
+								maxlength="50"
+								ng-model="model.email"
+								ng-init="model.email=null"
+								ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
+								required>
+				</div>
+			
+				<!-- Address -->
+				<div class="mb-3 col-12 col-md-6">
+					<label for="address" class="form-label">Lakcím:</label>
+					<input class="form-control"
+								id="address"
+								name="address" 
+								type="text"
+								spellcheck="false" 
+								autocomplete="off"
+								maxlength="200"
+								ng-model="model.address"
+								ng-init="model.address=null"
+								required>
+				</div>
+			</div>
+	
+			<div class="row">
+
+				<!-- Card name -->
+				<div class="mb-3 col-12 col-md-6">
+					<label for="card_name" class="form-label">Kártyán szereplő név:</label>
+					<input class="form-control"
+								 id="card_name"
+								 name="card_name" 
+								 type="text"
+								 spellcheck="false" 
+								 autocomplete="off"
+								 maxlength="100"
+								 ng-model="model.card_name"
+								 ng-init="model.card_name=null"
 								 required>
 				</div>
-	
-				<div class="row">
-					<div class="col-md-6">
-						<!-- cardNumber -->
-						<label for="cardNumber" class="form-label">Kártyaszám:</label>
-						<input class="form-control"
-									 id="cardNumber"
-									 name="cardNumber" 
-									 type="text"
-									 spellcheck="false" 
-									 autocomplete="off"
-									 maxlength="19"
-									 ng-model="model.cardNumber"
-									 ng-init="model.cardNumber=null"
-									 placeholder="XXXX-XXXX-XXXX-XXXX"
-									 required>
-					</div> 
-					<div class="col-md-6">
-						<!-- cardName -->
-						<label for="cardName" class="form-label">Kártyán szereplő név:</label>
-						<input class="form-control"
-									 id="cardName"
-									 name="cardName" 
-									 type="text"
-									 spellcheck="false" 
-									 autocomplete="off"
-									 maxlength="100"
-									 ng-model="model.cardName"
-									 ng-init="model.cardName=null"
-									 required>
-					</div>
-	
-				</div>
 
-				<div class="row justify-content-start">
-					<div class="col-md-3">
-						<!-- Lejárat -->
-						<label for="expiration" class="form-label">Lejárat:</label>
-						<input class="form-control"
-									 id="expiration"
-									 name="expiration" 
-									 type="text"
-									 spellcheck="false" 
-									 autocomplete="off"
-									 maxlength="5"
-									 ng-model="model.expiration"
-									 ng-init="model.expiration=null"
-									 required>
-					</div> 
-					<div class="col-md-3">
-						<!-- CVC -->
-						<label for="cvc" class="form-label">CVC</label>
-						<input class="form-control"
-									 id="cvc"
-									 name="cvc" 
-									 type="text"
-									 spellcheck="false" 
-									 autocomplete="off"
-									 maxlength="3"
-									 ng-model="model.cvc"
-									 ng-init="model.cvc=null"
-									 required>
-					</div>
-	
+				<!-- Card number -->
+				<div class="mb-3 col-12 col-md-6">
+					<label for="card_number" class="form-label">Kártyaszám:</label>
+					<input class="form-control"
+								 id="card_number"
+								 name="card_number" 
+								 type="text"
+								 spellcheck="false" 
+								 autocomplete="off"
+								 maxlength="19"
+								 ng-model="model.card_number"
+								 ng-init="model.card_number=null"
+								 placeholder="XXXX-XXXX-XXXX-XXXX"
+								 required>
+				</div> 
+			</div>
+
+			<div class="row">
+
+				<!-- Year/Month -->
+				<div class="mb-3 col-12 col-sm-6">
+					<label for="year" class="form-label text-black d-block">
+						Lejárat:
+					</label>
+					<select class="form-select w-auto d-inline-block" 
+									aria-label="year"
+									id="year"
+									name="year"
+									ng-model="model.year"
+									ng-init="model.year=null"
+									ng-options="x as x for x in years"
+									required>
+						<option hidden disabled selected value>
+							-- év --
+						</option>
+					</select>
+					<label for="month" class="form-label text-black d-inline-block">
+						/
+					</label>
+					<select class="form-select w-auto d-inline-block"
+									name="month"
+									id="month"
+									ng-model="model.month"
+									ng-init="model.month=null"
+									ng-options="x as x for x in months"
+									required>
+						<option hidden disabled selected value>
+							-- hó --
+						</option>
+					</select>
 				</div>
-				<!-- Accept button -->
-				<div class="my-4 text-end">
-					<button type="button" 
-									class="btn btn-primary px-5"
-									ng-disabled="dataApplyFor.$invalid || !$root.sum"
-									ng-click="applyFor()">
-						Fizetés
-					</button>
+				
+				<!-- Verification code -->
+				<div class="mb-3 col-12 col-sm-6">
+					<label for="cvv" class="form-label text-black">
+						Ellenőrző kód:
+					</label>
+					<input class="form-control" 
+								 type="text" 
+								 placeholder="CVV"
+								 name="cvv"
+								 id="cvv"
+								 ng-model="model.cvv"
+								 ng-init="model.cvv=null"
+								 ng-pattern="/^\d{3,3}$/"
+								 maxlength="3"
+								 required
+								 style="max-width:152px;">
 				</div>
-			</form>
-		</div>
+			</div>
+
+			<!-- Accept button -->
+			<div class="row my-4 justify-content-end">
+				<button type="button" 
+								class="btn btn-primary px-5 w-auto me-3"
+								ng-disabled="dataApplyFor.$invalid || !$root.sum"
+								ng-click="applyFor()">
+					Fizetés
+				</button>
+			</div>
+		</form>
 	</div>
 </div>

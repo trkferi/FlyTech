@@ -16,21 +16,47 @@ $db = new Database();
 
 // Set query
 $query = "INSERT INTO `checkout` 
-					(`name`, `country_code`, `phone`, `email`, `address`, `card_number`, `card_name`, `expiration`, `cvc`) 
+					(`name`, `country_code`, `phone`, `email`, `address`, 
+					 `card_name`, `card_number`, `cvc`, `expiration`) 
 					VALUES";
 					
-
 // Execute query
-$result = $db->execute($query, $args);
-
-// Close connection
-$db = null;
+$result = $db->execute($query, $args['data']);
 
 // Check not success
 if (!$result['affectedRows']) {
 
 	// Set error
-	Util::setError('Sikertelen fizetés');
+	Util::setError('Sikertelen fizetés (checkout)!', $db);
+}
+
+// Set query
+$query = "INSERT INTO `checkout_row` 
+					(`checkout_id`, `flights_id`, `price`, `quantity`, `total`) 
+					VALUES";
+
+$params = array();
+foreach($args['cart'] as $item) {
+	$params = array_merge($params, array(
+		$result['lastInsertId'],
+		$item['flights_id'],
+		$item['price'],
+		$item['quantity'],
+		$item['total']
+	));
+}
+
+// Execute query
+$result = $db->execute($query, $params);
+
+// Close connection
+$db = null;
+
+// Check not success
+if ($result['affectedRows'] !== count($args['cart'])) {
+
+	// Set error
+	Util::setError('Sikertelen fizetés (checkout_row)!', $db);
 }
 
 // Set response

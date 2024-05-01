@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Josefin+Sans:wght@500&family=Kristi&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Josefin+Sans:wght@500&family=Kristi&family=Zilla+Slab:wght@300&display=swap');
 
-.table-hover > tbody > tr:hover > * {
-  background-color: rgb(211, 233, 246);
+table.table-hover > tbody > tr:hover > * {
+  background-color: LightCyan;
   font-weight: 600;
 }
 .navbar-brand{

@@ -4,7 +4,6 @@ declare(strict_types=1);
 // Using namespaces aliasing
 use Util\Util as Util;
 use Database\Database as Database;
-$_POST['data'] = '{"id":1}';
 
 // Set environment
 require_once('../../common/php/environment.php');
@@ -15,8 +14,8 @@ $args = Util::getArgs();
 // Connect to database
 $db = new Database();
 
-// Get next day (24h)
-$args['start'] = date('Y-m-d H:i:s', strtotime(' +1 day'));
+// Get next day (+24h)
+$args['start']  = date('Y-m-d H:i', strtotime('+1 day'));
 
 // Set query 
 $query = "SELECT  `flights_id`,
@@ -24,10 +23,11 @@ $query = "SELECT  `flights_id`,
                   `distance`, 
                   `period`, 
                   `price`,
-                  `start`
+                  `direction`,
+                  LEFT(`start`, 16) AS `start`
             FROM `flights` 
             WHERE `starting_id` = :id AND
-                  `start` > :start 
+                  LEFT(`start`, 16) > :start 
                   ORDER BY `start` ASC";
             
 // Execute query with argument
@@ -38,14 +38,10 @@ $query = "SELECT DISTINCT `name`,
                           `direction`            
                      FROM `flights` 
                     WHERE `starting_id` = :id AND
-                          `start` > :start";
+                          LEFT(`start`, 16) > :start";
 
 // Execute query with argument
-$result['names'] = array();
-$names = $db->execute($query, $args);
-foreach($names as $row) {
-  $result['names'][] = $row['name'];
-}
+$result['names'] = $db->execute($query, $args);
 
 // Close connection
 $db = null;

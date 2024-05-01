@@ -1,26 +1,28 @@
 <div class="{{flight.city}}-banner mb-3"></div>
 
 <div class="container text-center my-5">
-	<h1 class="mt-5">{{flight.city}}</h1>
+	<h1 class="mt-5 display-4">{{flight.city}}</h1>
 
   <div class="row justify-content-start">
-
-    <div class="my-3 col-6">
+    <div class="mt-3 col-6">
       <select class="form-select"
-              ng-options="item as item for item in names track by item" 
+              name="selected"
+              ng-options="selected.name for selected in names"
               ng-model="model.selected">
         <option selected value>
           -- kérem válasszon --
         </option>
-        <!-- <h2>{{model.select.direction}}</h2> -->
       </select>
+    </div>
+
+    <div class="mt-2 col-12" style="min-height:110px;">
+      <h4 class="text-start display-6">
+        {{model.selected.direction}}
+      </h4>
     </div>
   </div>
 
-  <div class="row">
-    <h2>{{model.selected}}</h2>
-  </div>
-	<div class="row mt-5">
+	<div class="row mt-2">
     <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
@@ -30,12 +32,14 @@
       <tbody>
         <tr class="cursor-pointer"
             ng-if="data && data.length && 
-                  (!model.selected || model.selected === x.name)"
+                  (!model.selected || model.selected.name === x.name)"
             data-id="{{x.flights_id}}"
-            ng-click="toCart($event)"
+            ng-click="confirm($event)"
             ng-repeat="x in data">
           <td ng-repeat="(k, v) in x"
-              ng-if="!['name','flights_id'].includes(k)">{{v}}</td>
+              ng-if="!['name','flights_id','direction'].includes(k)">
+            {{k==='price' ? (v | numSep) : v}}
+          </td>
         </tr>
         <tr ng-if="!data || !data.length">
           <td colspan="{{header.length}}">üres</td>
@@ -43,4 +47,74 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<!-- Megerősítés -->
+<div class="modal modal-lg fade mt-5"
+		 data-bs-backdrop="static" 
+		 data-bs-keyboard="false" 
+		 aria-labelledby="staticBackdropLabel" 
+		 aria-hidden="true"
+		 id="confirmModal" 
+		 tabindex="-1">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+			<div class="modal-header">
+			  <h2 class="modal-title mx-auto">Kosárba szeretnéd tenni?</h2>
+			  <button type="button" 
+								class="btn-close me-1" 
+								data-bs-dismiss="modal" 
+								aria-label="Close">
+				</button>
+			</div>
+			<div class="modal-body">
+			  <div class="container">
+          <form name="confirmForm">
+            <table class="table table-sm table-borderless">
+              <tbody>
+                <tr ng-repeat="(k, v) in item"
+                    ng-switch="k">
+                  <th class="text-end text-nowrap"
+                      ng-class="{'pt-2': k==='Hely (db)'}">{{k}}:</th>
+                  <td ng-switch-when="Hely (db)">
+                    <input type="number" 
+                           class="form-control form-control-sm"
+                           min="1" 
+                           max="10"
+                           name="quantity"
+                           id="quantity"
+                           style="max-width:60px;"
+                           ng-model="model.quantity"
+                           ng-init="model.quantity=1"
+                           required>
+                  </td>
+                  <th ng-switch-when="Össesen (Ft)">
+                    {{v * model.quantity | numSep}}
+                  </th>
+                  <td ng-switch-default>{{v}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <hr>
+            <div class="row justify-content-end mt-3 mb-0">
+              <button type="button" 
+                      class="btn btn-primary mx-2 mb-2 w-auto" 
+                      data-bs-dismiss="modal"
+                      style="min-width:100px;"
+                      ng-disabled="confirmForm.$invalid"
+                      ng-click="flightToCart()">
+                Ok
+              </button>
+              <button type="button" 
+                      class="btn btn-secondary mx-2 mb-2 w-auto" 
+                      data-bs-dismiss="modal"
+                      style="min-width:100px;">
+                Mégsem
+              </button>
+            </div>
+          </form>
+				</div>
+			</div>
+		</div>	
+	</div>
 </div>

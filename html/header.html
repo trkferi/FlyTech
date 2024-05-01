@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg"  
-		 style="background-color: #A4D2EF;">
+		 style="background-color: #A4D2EF;"
+		 ng-bs-navbar-collapse>
+
 	<div class="container-fluid">
 		<a class="navbar-brand" ui-sref="home"> Fly<br>Tech </a>
 		<a class="navbar-brand" href="#"> 
@@ -54,21 +56,21 @@
 						FlyTech
 					</a>
 					<ul class="dropdown-menu">
-						<li>
+						<li class="nav-item">
 							<a class="dropdown-item" 
 								 ui-sref="relationship"
 								 ui-sref-active="active">
 								Kapcsolat
 							</a>
 						</li>
-						<li>
+						<li class="nav-item">
 							<a class="dropdown-item" 
 								 ui-sref="about_us"
 								 ui-sref-active="active">
 								Rólunk
 							</a>
 						</li>
-						<li>
+						<li class="nav-item">
 							<a class="dropdown-item" 
 								 ui-sref="opinions"
 								 ui-sref-active="active">
@@ -78,14 +80,16 @@
 					</ul>
 				</li>
 			</ul>
-			<span class="navbar-text ms-auto">
-				<a class="nav-link" 
-					 ui-sref="cart"
-					 ui-sref-active="active">
-					<img ng-src="./pics/shopping-cart.svg" class="kosar">
-					<span class="cartCount">{{$root.cart.length}}</span>
-				</a>
-			</span>
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item">
+					<a class="nav-link" 
+						ui-sref="cart"
+						ui-sref-active="active">
+						<img ng-src="./pics/shopping-cart.svg" class="kosar">
+						<span class="cartCount">{{$root.cart.length}}</span>
+					</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </nav>
