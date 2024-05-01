@@ -569,10 +569,8 @@
 					$rootScope.sum  = 0;
 					$rootScope.$applyAsync();
 
-					// Check ignored states
-          if ($rootScope.ignoredStates.includes($rootScope.state.prev))
-					      $state.go('home');
-          else  $rootScope.goToPreviousState();
+					// Go to previous state
+          $rootScope.goToPreviousState();
 
 					// Show message
 					$timeout(() => { alert(msg); }, 50);
