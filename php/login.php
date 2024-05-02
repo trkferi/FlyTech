@@ -17,7 +17,7 @@ $db = new Database();
 // Set query
 $query = "SELECT 	`id`, 
 									`name`,
-									`born` 
+									`born`, 
 									`country_code`, 
 									`phone`, 
 									`address` 
