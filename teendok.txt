@@ -7,7 +7,7 @@ Checkout oldal:
 
 Jaratok oldal (jaratok.html  names array of object select)
     - Ha a legördülőben kiválasztjuk a körjáratot egy h2-be írja ki a hozzátartozó direction-t
-    flights -> jaratok a táblázat ugyanaz!!!!
+    flights -> jaratok a táblázat ugyanaz!!!!  OK
     
 Offer oldal
     - ajánlat felvitele adatbázisba (működött de valami most nem jó)   OK
