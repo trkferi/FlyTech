@@ -5,7 +5,8 @@
   // Application module
   angular.module('app', [
     'ui.router',
-		'app.common'
+		'app.common',
+		'app_user'
   ])
 
   // Application config
@@ -27,6 +28,10 @@
 					'footer@root': {
 						templateUrl: './html/footer.html',
 						controller: 'footerController'
+					},
+					'user@root': {
+						templateUrl: './html/user.html',
+						controller: 'userController'
 					}
 				}
       })
@@ -94,14 +99,26 @@
   .run([
 		'$rootScope',
     'trans',
-    ($rootScope, trans) => {
+		'user',
+    ($rootScope, trans, user) => {
 
 			// Set global cart
 			$rootScope.cart = [];
 			$rootScope.sum  = 0;
 
       // Transaction events
-			trans.events('jaratok,cart');
+			trans.events('jaratok,cart,test_drive,offer');
+
+			// Get user
+      user.get().then(() => {
+
+        // Check user exist
+        if ($rootScope.user.id) {
+
+          // Get user rest properties
+          user.user();
+        }
+      });
     }
   ])
 
@@ -123,25 +140,25 @@
 	])
 
 	// Flights controller
-    .controller('flightsController', [
+  .controller('flightsController', [
 		'$scope',
-			'http',
+		'http',
 		function($scope, http) {
 				
-				// Http request
-				http.request('./php/starting_point.php')
-				.then(response => {
-					
-					// Set data
-					$scope.data = response;
-					$scope.$applyAsync();
-				})
-				.catch(error => alert(error));
-			}
-		])
+			// Http request
+			http.request('./php/starting_point.php')
+			.then(response => {
+				
+				// Set data
+				$scope.data = response;
+				$scope.$applyAsync();
+			})
+			.catch(error => alert(error));
+		}
+	])
 	
-		// Járatok controller
-	  .controller('jaratokController', [
+	// Járatok controller
+	.controller('jaratokController', [
 		'$state',
 		'$stateParams',
 		'$rootScope',
@@ -150,93 +167,98 @@
 		'util',
 		function($state, $stateParams, $rootScope, $scope, http, util) {
 	
-				// Check state parameters not exist
-				if (!$stateParams.flight) {
+			// Check state parameters not exist
+			if (!$stateParams.flight) {
 
-					// Check ignored states
-          if ($rootScope.ignoredStates.includes($rootScope.state.prev))
-					      $state.go('home');
-          else  $rootScope.goToPreviousState();
-				}
+				// Check ignored states
+        if ($rootScope.ignoredStates.includes($rootScope.state.prev))
+				      $state.go('home');
+        else  $rootScope.goToPreviousState();
+			}
 
-				// Set actual flight from state parameters
-				$scope.flight = $stateParams.flight;
-				
-				// Table header
-				$scope.header = [
-					"Távolság (km)",
-					"Időtartam (perc)",
-					"Ár (Ft)",
-					"Indulás",
-				];
+			// Set actual flight from state parameters
+			$scope.flight = $stateParams.flight;
+			
+			// Table header
+			$scope.header = [
+				"Távolság (km)",
+				"Időtartam (perc)",
+				"Ár (Ft)",
+				"Indulás",
+			];
 	
-				// Http request
-				http.request({
-					url: './php/jaratok.php',
-					data: {id: $scope.flight.id}
-				})
-				.then(response => {
-					
-					// Set flights data, and names 
-					$scope.data = response.flights;
-					$scope.names = response.names;
-					$scope.$applyAsync();
-				})
-				.catch(error => alert(error));
+			// Http request
+			http.request({
+				url: './php/jaratok.php',
+				data: {id: $scope.flight.id}
+			})
+			.then(response => {
 				
-				// Confirm
-				$scope.confirm = (event) => {
-					let element 			= event.currentTarget,
-							id 						= parseInt(element.dataset.id),
-							index   			= util.indexByKeyValue($scope.data, 'flights_id', id),
-							modalElement	= document.querySelector('#confirmModal');
-					if (index !== -1 && modalElement) {
-						$scope.model = {quantity: 1};
-						$scope.item = {
-							"Helyiség": $scope.flight.city,
-							"Járat": $scope.data[index].name,
-							"Járatszám": $scope.data[index].flights_id,
-							"Irány": $scope.data[index].direction,
-							"Távolság (km)": $scope.data[index].distance,
-							"Időtartam (perc)": $scope.data[index].period,
-							"Dátum": $scope.data[index].start.substr(0, 10),
-							"Indulás": $scope.data[index].start.slice(-5),
-							"Egységár (Ft)": util.mumberToStringThousandSeparator($scope.data[index].price),
-							"Hely (db)": 1,
-							"Össesen (Ft)": $scope.data[index].price
-						}
-						$scope.$applyAsync();
-						let modal = new bootstrap.Modal(modalElement); 
-						modal.show();
-					}
+				// Set flights data, and names 
+				$scope.data = response.flights;
+				$scope.names = response.names;
+				$scope.$applyAsync();
+			})
+			.catch(error => alert(error));
+			
+			// Confirm
+			$scope.confirm = (event) => {
+				
+				if (!$rootScope.user.id) {
+					alert(`Jelentkezz be, vagy regisztrálj, ha a kosárba szeretnéd rakni!`);
+					return;
 				}
 
-				// Flight to cart
-				$scope.flightToCart = () => {
-					let price = parseInt($scope.item["Egységár (Ft)"].replace(/\s/g,'')),
-							total = $scope.model.quantity * price,
-							item 	= {
-												city: $scope.item["Helyiség"],
-												flights_id: $scope.item["Járatszám"],
-												name: $scope.item["Járat"],
-												start: $scope.item["Dátum"] + " " + $scope.item["Indulás"],
-												quantity: $scope.model.quantity,
-												price: price,
-												total: total 
-											};
-					
-					let index = util.indexByKeyValue($rootScope.cart, 'flights_id', item.flights_id);
-					if (index !== -1) {
-									$rootScope.cart[index].quantity += item.quantity;
-									$rootScope.cart[index].total += item.total;
-					} else 	$rootScope.cart.push(item);
-					$rootScope.sum += total;
-					$rootScope.$applyAsync();
+				let element 			= event.currentTarget,
+						id 						= parseInt(element.dataset.id),
+						index   			= util.indexByKeyValue($scope.data, 'flights_id', id),
+						modalElement	= document.querySelector('#confirmModal');
+				if (index !== -1 && modalElement) {
+					$scope.model = {quantity: 1};
+					$scope.item = {
+						"Helyiség": $scope.flight.city,
+						"Járat": $scope.data[index].name,
+						"Járatszám": $scope.data[index].flights_id,
+						"Irány": $scope.data[index].direction,
+						"Távolság (km)": $scope.data[index].distance,
+						"Időtartam (perc)": $scope.data[index].period,
+						"Dátum": $scope.data[index].start.substr(0, 10),
+						"Indulás": $scope.data[index].start.slice(-5),
+						"Egységár (Ft)": util.mumberToStringThousandSeparator($scope.data[index].price),
+						"Hely (db)": 1,
+						"Össesen (Ft)": $scope.data[index].price
+					}
+					$scope.$applyAsync();
+					let modal = new bootstrap.Modal(modalElement); 
+					modal.show();
 				}
 			}
-		])
-	
 
+			// Flight to cart
+			$scope.flightToCart = () => {
+				let price = parseInt($scope.item["Egységár (Ft)"].replace(/\s/g,'')),
+						total = $scope.model.quantity * price,
+						item 	= {
+											city: $scope.item["Helyiség"],
+											flights_id: $scope.item["Járatszám"],
+											name: $scope.item["Járat"],
+											start: $scope.item["Dátum"] + " " + $scope.item["Indulás"],
+											quantity: $scope.model.quantity,
+											price: price,
+											total: total 
+										};
+				
+				let index = util.indexByKeyValue($rootScope.cart, 'flights_id', item.flights_id);
+				if (index !== -1) {
+								$rootScope.cart[index].quantity += item.quantity;
+								$rootScope.cart[index].total += item.total;
+				} else 	$rootScope.cart.push(item);
+				$rootScope.sum += total;
+				$rootScope.$applyAsync();
+			}
+		}
+	])
+	
 	// Test drive controller
   .controller('test_driveController', [
     '$scope',
@@ -516,8 +538,6 @@
 		}
 	])
 
-
-
 	// Cart controller
   .controller('cartController', [
 		'$state',
@@ -593,6 +613,9 @@
 					'month',
 				], false);
 
+				// Set user identifier
+				args.user_id = $rootScope.user.id;
+
 				// Set card expiration
 				args.expiration = $scope.model.year + '/' + $scope.model.month;
 
@@ -665,6 +688,114 @@
 				.then(response => methods.reset(response))
 				.catch(error => methods.reset(error));
 			};
+		}
+	])
+
+	// User controller
+  .controller('userController', [
+		'$rootScope',
+  	'$scope',
+		'$timeout',
+		'http',
+		'util',
+		'user',
+    function($rootScope, $scope, $timeout, http, util, user) {
+			
+			// Set model
+			$scope.model = {
+				name: null,
+				born: null,
+				country_code: '36',
+				phone: null, 
+				address: null, 
+				email: null, 
+				password: null,
+				email2: user.getEmail(), 
+				password2: null,
+				roole: null
+			};
+
+			// Reset model
+			let reset = () => {
+				Object.keys($scope.model).forEach((key) => {
+					if (key === 'email2') 
+								$scope.model[key] = user.getEmail();
+					else if (key === 'country_code')
+								$scope.model[key] = '36';
+					else 	$scope.model[key] = null;
+				});
+			};
+
+			// Login
+			$scope.login = () => {
+
+				// Set arguments
+				let args = {
+					email: $scope.model.email2,
+					password: $scope.model.password2
+				}
+
+				// Http request
+				http.request({
+					url: './php/login.php',
+					data: args
+				})
+				.then(response => {
+
+					// Reset model
+					reset();
+
+					// Convert born to date type, and set email
+					response.born = moment(response.born).toDate();
+					response.email = args.email;
+
+					// Set user
+					$rootScope.user = util.objMerge($rootScope.user, response, true);
+
+					// Save user properties to local storage
+					user.save();
+					$rootScope.$applyAsync();
+				})
+				.catch(e => $timeout(() => { alert(e); }, 50));
+			} 
+
+			// Register
+			$scope.regisztral = () => {
+
+				// Set arguments
+				let args = 	util.objFilterByKeys($scope.model, [
+											'email2', 'password2', 'roole'
+										], false);
+
+				// Convert born day
+				args.born = moment(args.born).format('YYYY-MM-DD');						
+
+				// Http request
+				http.request({
+					url: './php/registration.php',
+					data: args
+				})
+				.then(response => {
+
+					// Set user identifier
+					args.id = response.lastInsertId;
+
+					// Set born date
+					args.born = moment(args.born).toDate();
+
+					// Set user
+					$rootScope.user = util.objMerge($rootScope.user, args, true);
+
+					// Save user properties to local storage
+					user.save();
+
+					// Reset model
+					reset();
+
+					$rootScope.$applyAsync();
+				})
+				.catch(e => $timeout(() => { alert(e); }, 50));
+			}
 		}
 	]);
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Máj 01. 23:26
+-- Létrehozás ideje: 2024. Máj 02. 03:35
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `checkout` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `country_code` varchar(3) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -45,8 +46,11 @@ CREATE TABLE `checkout` (
 -- A tábla adatainak kiíratása `checkout`
 --
 
-INSERT INTO `checkout` (`id`, `name`, `country_code`, `phone`, `email`, `address`, `card_number`, `card_name`, `expiration`, `cvc`) VALUES
-(1, 'Ódry Attila', '36', '701234123', 'odry.attila@keri.mako.hu', 'Szeged', '1111111111111111111', 'Ódry Attila', '2025/03', 123);
+INSERT INTO `checkout` (`id`, `user_id`, `name`, `country_code`, `phone`, `email`, `address`, `card_number`, `card_name`, `expiration`, `cvc`) VALUES
+(1, 15, 'Ódry Attila', '36', '701234123', 'odry.attila@keri.mako.hu', 'Szeged', '1111111111111111111', 'Ódry Attila', '2025/03', 123),
+(2, 15, 'a', '36', '1111111111', 'a@a.aa', 'aaaa', '1111111111111111111', 'a', '2031/08', 123),
+(3, 15, 'a', '36', '1111111111', 'a@a.aa', 'ww', '1111111111111111111', 'aaa', '2033/07', 123),
+(4, 15, 'Ódry Attila', '36', '304816888', 'odry.attila@keri.mako.hu', '6725 Szeged, Futrinka utca 66.', '1111111111111111111', 'aaa', '2024/07', 123);
 
 -- --------------------------------------------------------
 
@@ -71,7 +75,13 @@ INSERT INTO `checkout_row` (`id`, `checkout_id`, `flights_id`, `price`, `quantit
 (1, 1, 49, 40000, 3, 120000),
 (2, 1, 56, 40000, 2, 80000),
 (3, 1, 70, 42000, 1, 42000),
-(4, 1, 63, 40000, 1, 40000);
+(4, 1, 63, 40000, 1, 40000),
+(5, 2, 32, 35000, 1, 35000),
+(6, 2, 43, 55000, 3, 165000),
+(7, 3, 40, 55000, 1, 55000),
+(8, 3, 52, 40000, 3, 120000),
+(9, 4, 12, 30000, 1, 30000),
+(10, 4, 26, 50000, 1, 50000);
 
 -- --------------------------------------------------------
 
@@ -368,6 +378,72 @@ CREATE TABLE `testdrive` (
 INSERT INTO `testdrive` (`id`, `plane_id`, `name`, `country_code`, `phone`, `email`, `address`, `experience`, `comment`, `created`) VALUES
 (0, 0, 'Török Ferenc', '36', '303947299', 'torokferi2004@gmail.com', '6636 Mártély Hunyadi utca 23', 1, 'Remélem jó', '2024-04-03 08:38:33');
 
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `born` date DEFAULT NULL,
+  `country_code` varchar(3) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `born`, `country_code`, `phone`, `address`, `email`, `password`) VALUES
+(1, 'Bálint Bence Dániel', NULL, NULL, NULL, NULL, 'balint.bencedaniel-2019@keri.mako.hu', '1234Aa'),
+(2, 'Bálint Gergő', NULL, NULL, NULL, NULL, 'balint.gergo-2019@keri.mako.hu', '1234Aa'),
+(3, 'Földi Ákos Ádám', NULL, NULL, NULL, NULL, 'foldi.akosadam-2019@keri.mako.hu', '1234Aa'),
+(4, 'Kányási Dávid Gergő', NULL, NULL, NULL, NULL, 'kanyasi.davidgergo-2019@keri.mako.hu', '1234Aa'),
+(5, 'Kiss Benjámin Zoltán', NULL, NULL, NULL, NULL, 'kiss.benyaminzoltan-2019@keri.mako.hu', '1234Aa'),
+(6, 'Surányi Csenge', NULL, NULL, NULL, NULL, 'suranyi.csenge-2019@keri.mako.hu', '1234Aa'),
+(7, 'Szabó Martin Tamás', NULL, NULL, NULL, NULL, 'szabo.martintamas-2019@keri.mako.hu', '1234Aa'),
+(8, 'Tóth Barnabás Gyula', '2004-06-19', NULL, NULL, '', 'toth.barnabasgyula-2019@keri.mako.hu', '1234Aa'),
+(9, 'Török Ferenc', NULL, NULL, NULL, NULL, 'torok.ferenc-2019@keri.mako.hu', '1234Aa'),
+(10, 'Valach Martin', NULL, NULL, NULL, NULL, 'valach.martin-2019@keri.mako.hu', '1234Aa'),
+(11, 'Vörös Alexandra', NULL, NULL, NULL, NULL, 'voros.alexandra-2019@keri.mako.hu', '1234Aa'),
+(12, 'Gera Imre', NULL, NULL, NULL, NULL, 'gera.imre.tch@gmail.com', '1234Aa'),
+(13, 'Kiss Andrea', NULL, NULL, NULL, NULL, 'kissamail@gmail.com', '1234Aa'),
+(14, 'Molnár Zsolt', NULL, NULL, NULL, NULL, 'molnarzsoltnavay@gmail.com', '1234Aa'),
+(15, 'Ódry Attila', '1964-03-08', '36', '304816888', '6725 Szeged, Futrinka utca 66.', 'odry.attila@keri.mako.hu', '1234Aa'),
+(16, 'Vidéki Gyula Milán', NULL, NULL, NULL, NULL, 'videki.gyula.milan@gmail.com', '1234Aa');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `users_old`
+--
+
+CREATE TABLE `users_old` (
+  `id` int(10) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `post_code` varchar(4) NOT NULL,
+  `city` varchar(20) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `users_old`
+--
+
+INSERT INTO `users_old` (`id`, `first_name`, `last_name`, `email`, `password`, `phone`, `post_code`, `city`, `address`, `date`) VALUES
+(1, 'Attila', 'Ódry', 'odry.attila@keri.mako.hu', '1234Aa', '3651561651', '6900', 'Szeged', 'Futrinka u. 66.', '1964-03-08'),
+(2, 'asasassa', 'sasaas', 'a@a.aa', '1234Aa', '111111111111', '6720', 'Szeged', 'Futrinka u. 66.', '2024-03-13');
+
 --
 -- Indexek a kiírt táblákhoz
 --
@@ -403,6 +479,19 @@ ALTER TABLE `opinions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- A tábla indexei `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- A tábla indexei `users_old`
+--
+ALTER TABLE `users_old`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
 
@@ -410,13 +499,13 @@ ALTER TABLE `opinions`
 -- AUTO_INCREMENT a táblához `checkout`
 --
 ALTER TABLE `checkout`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `checkout_row`
 --
 ALTER TABLE `checkout_row`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT a táblához `flights`
@@ -435,6 +524,18 @@ ALTER TABLE `offer`
 --
 ALTER TABLE `opinions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT a táblához `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT a táblához `users_old`
+--
+ALTER TABLE `users_old`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

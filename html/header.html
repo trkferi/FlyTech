@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg"  
+<nav class="navbar navbar-expand-xl"  
 		 style="background-color: #A4D2EF;"
 		 ng-bs-navbar-collapse>
 
@@ -81,10 +81,30 @@
 				</li>
 			</ul>
 			<ul class="navbar-nav ms-auto">
+				<li class="nav-item me-3">
+					<div class="me-2 d-inline-block fs-5"
+							 ng-if="$root.user.id">
+						{{$root.user.name}}
+					</div>
+					<div id="regisztracio"
+							 class="d-inline-block pt-1 cursor-pointer"
+							 data-bs-toggle="modal" 
+							 data-bs-target="#loginModal"
+							 ng-if="!$root.user.id">
+						<i class="fa-solid fa-user fa-lg mt-4"></i>
+					</div>
+					<div id="kijelenkezes"
+							 class="d-inline-block pt-1 cursor-pointer"
+							 ng-if="$root.user.id"
+							 ng-click="logout()">
+						<i class="fa-solid fa-user fa-lg mt-4"></i>
+					</div> 
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" 
-						ui-sref="cart"
-						ui-sref-active="active">
+						 ui-sref="cart"
+						 ui-sref-active="active"
+						 ng-disabled="!$root.user.id">
 						<img ng-src="./pics/shopping-cart.svg" class="kosar">
 						<span class="cartCount">{{$root.cart.length}}</span>
 					</a>

@@ -17,7 +17,7 @@ $db = new Database();
 // Set query
 $query = "INSERT INTO `checkout` 
 					(`name`, `country_code`, `phone`, `email`, `address`, 
-					 `card_name`, `card_number`, `cvc`, `expiration`) 
+					 `card_name`, `card_number`, `cvc`, `user_id`, `expiration`) 
 					VALUES";
 					
 // Execute query
