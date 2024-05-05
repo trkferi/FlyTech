@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-A járatok oldalnál nem lehet kosárba tenni a dolgokat bejelentkezés.
-=======
+A járatok oldalnál nem lehet kosárba tenni a dolgokat bejelentkezés. ????
+
 jaratok sor kiemelése egér felett OK
 
 Checkout oldal:
@@ -15,4 +14,3 @@ Jaratok oldal (jaratok.html  names array of object select)
 Offer oldal
     - ajánlat felvitele adatbázisba (működött de valami most nem jó)   OK
 
->>>>>>> 5694040be5b69c7e5cef71164393ab81bd65b71c
