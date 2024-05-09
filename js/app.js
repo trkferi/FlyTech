@@ -556,7 +556,7 @@
 				start: "Indulás",
 				price: "Egységár (Ft)",
 				quantity: "Hely (db)",
-				total: "Össesen (Ft)"
+				total: "Összesen (Ft)"
 			};
 
 			// Get current date, year, month
