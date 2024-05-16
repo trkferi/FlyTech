@@ -13,7 +13,7 @@ body{
   font-family: 'Zilla Slab';
 }
 p, li{
-  font-size: 25px;
+  font-size:25px;
 }
 .navbar-text{
   align-items: right;
@@ -105,9 +105,6 @@ p, li{
 .fooldal1{
     border: 1px solid black;
     border-radius: 20px;
-    float: left;
-    max-width: 500px;
-    margin-right: 20px;
 
 }
 p{
